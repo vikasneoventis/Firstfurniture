@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="xtento_trackingimport_source_grid_block"/>
+    <body>
+        <referenceContainer name="page.content">
+            <block before="page_main_actions" class="Xtento\TrackingImport\Block\Adminhtml\Widget\Menu" name="trackingimport.menu"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Xtento\TrackingImport\Block\Adminhtml\Source" name="adminhtml.trackingimport.source.grid.container"/>
+        </referenceContainer>
+    </body>
+</page>
+
+<!--
+/**
+ * Product:       Xtento_TrackingImport (2.1.9)
+ * ID:            4wmf19Yp9HCIHo7KOs8fxcH61vi7Ff3lLVajZHUke48=
+ * Packaged:      2017-06-14T12:47:31+00:00
+ * Last Modified: 2016-03-04T21:48:41+00:00
+ * File:          app/code/Xtento/TrackingImport/view/adminhtml/layout/xtento_trackingimport_source_index.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

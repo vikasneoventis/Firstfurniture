@@ -1,0 +1,15 @@
+<script>
+    require(["jquery"], function ($) {
+        'use strict';
+        CodeMirror.fromTextArea(document.getElementById('script'), {
+            matchBrackets: true,
+            mode: "application/x-httpd-php",
+            indentUnit: 2,
+            indentWithTabs: false,
+            lineWrapping: true,
+            lineNumbers: true,
+            styleActiveLine: true
+
+        });
+    });
+</script>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @copyright Copyright (c) 2016 www.magebuzz.com
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magebuzz_Timecountdown::setting" title="Time Countdown" 
+             module="Magebuzz_Timecountdown" sortOrder="30" 
+             action="adminhtml/system_config/edit/section/timecountdown" 
+             resource="Magebuzz_Timecountdown::setting"/>
+    </menu>
+</config>

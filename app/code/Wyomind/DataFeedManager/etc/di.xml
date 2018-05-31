@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <!-- generation process -->
+    <type name="Wyomind\DataFeedManager\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Wyomind\DataFeedManager\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">DFM</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="notice" xsi:type="object">Wyomind\DataFeedManager\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <!-- cron process -->
+    <type name="Wyomind\DataFeedManager\Logger\HandlerCron">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    
+    <type name="Wyomind\DataFeedManager\Logger\LoggerCron">
+        <arguments>
+            <argument name="name" xsi:type="string">DFM-CRON</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="datafeedmanagercron" xsi:type="object">Wyomind\DataFeedManager\Logger\HandlerCron</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    
+    <!-- COMMAND LINE -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="dfm_generate" xsi:type="object">Wyomind\DataFeedManager\Console\Command\Generate</item>
+                <item name="dfm_list" xsi:type="object">Wyomind\DataFeedManager\Console\Command\Listing</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    
+</config>

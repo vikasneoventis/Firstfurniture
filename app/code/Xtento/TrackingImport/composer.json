@@ -1,0 +1,32 @@
+{
+  "name": "xtento/module-trackingimport",
+  "description": "XTENTO Tracking Number Import Module",
+  "require": {
+    "php": "~5.5.22|~5.6.0|7.0.2|7.0.4|~7.0.6",
+    "xtento/module-xtcore": "~2.0"
+  },
+  "type": "magento2-module",
+  "version": "2.1.9",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Xtento\\TrackingImport\\": ""
+    }
+  },
+  "authors": [
+    {
+      "name": "XTENTO GmbH & Co. KG",
+      "email": "info@xtento.com",
+      "homepage": "http://www.xtento.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "info@xtento.com"
+  }
+}

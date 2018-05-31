@@ -1,0 +1,177 @@
+<?php 
+$categories = $block->getCategories();
+
+$helper = $this->helper('WeltPixel\OwlCarouselSlider\Helper\Products');
+
+$sliderConfiguration = $helper->getSliderConfiguration('related');
+
+$sliderConfig = json_encode($sliderConfiguration);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+
+$isSlider = $this->getData('is_slider') == 'slider' ? true : false;
+
+$blockUniquId = $this->getData('id_name');
+?>
+<div class="<?php echo $isSlider ? 'homepageslider slider-brands' : 'homepage-category-blocks'?>">
+    <h3 class="slider-title"><?php echo $this->getData('title')?> </h3>
+    <div class="<?php echo $isSlider ? 'owl-carousel-'.$blockUniquId : 'category-items-'.$blockUniquId?>">
+        <?php $i = 0;?>
+        <?php foreach ( $categories as $category ) :?>
+            <?php $_category = $objectManager->create('Magento\Catalog\Model\Category')->load($category->getId());?>
+            <?php $catImageUrl = $_category->getImageUrl();?>
+            <?php
+            $_imgHtml = '<img src="' . $catImageUrl . '" />';
+            $_imgHtml = $_outputhelper->categoryAttribute($_category, $_imgHtml, 'image');
+            ?>
+            <?php if($_category->getIsTopCategory()):?>
+                <?php if($isSlider):?>
+                    <div class="item <?php echo ($i >= 4) ? 'active' : ''?>">
+                        <a href="<?php echo $block->getCategoryUrl($category); ?>"title="<?php echo $category->getName(); ?>" class="<?php echo($block->isActive($category) ? ' active' : ''); ?>">
+                            <?php echo $_imgHtml?>
+                        </a>
+                    </div>
+                <?php else:?>
+                    <div class="category-block-item">
+                        <div class="inner-category-element">
+                            <a href="<?php echo $block->getCategoryUrl($category); ?>"title="<?php echo $category->getName(); ?>" class="sub-cat-img">
+                                <?php echo $_imgHtml?>
+                            </a>
+                            <a href="<?php echo $block->getCategoryUrl($category); ?>"title="<?php echo $category->getName(); ?>" class="sub-cat-title">
+                                <span><?php echo $category->getName()?></span>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif;?>
+            <?php $i++;?>
+            <?php endif;?>
+        
+        <?php endforeach;?>
+    </div>
+</div>
+<?php if($isSlider):?>
+<script type="text/javascript">
+        require(['jquery', 'WeltPixel_OwlCarouselSlider/js/owl.carousel', 'WeltPixel_OwlCarouselSlider/js/owl.config' ],
+            function ($) { 
+                $(document).ready(function() {
+                    var products_type = 'owl-carousel-<?php echo $blockUniquId?>',
+                        slider_config = {
+                                            "status":"1",
+                                            "title":"Related products",
+                                            "show_price":null,
+                                            "show_addto":null,
+                                            "show_wishlist":null,
+                                            "show_compare":null,
+                                            "nav":"1",
+                                            "dots":"0",
+                                            "center":"0",
+                                            "items":"5",
+                                            "loop":"0",
+                                            "margin":"0",
+                                            "merge":null,
+                                            "URLhashListener":null,
+                                            "stagePadding":"0",
+                                            "lazyLoad":"1",
+                                            "autoplay":"0",
+                                            "autoplayTimeout":"3000",
+                                            "autoplayHoverPause":"1",
+                                            "nav_brk1":"0",
+                                            "dots_brk1":"1",
+                                            "items_brk1":"2",
+                                            "center_brk1":"0",
+                                            "stagePadding_brk1":"0",
+                                            "nav_brk2":"0",
+                                            "dots_brk2":"1",
+                                            "items_brk2":"3",
+                                            "center_brk2":"0",
+                                            "stagePadding_brk2":"0",
+                                            "nav_brk3":"0",
+                                            "dots_brk3":"1",
+                                            "items_brk3":"4",
+                                            "center_brk3":"0",
+                                            "stagePadding_brk3":"0",
+                                            "nav_brk4":"1",
+                                            "dots_brk4":"1",
+                                            "items_brk4":"5",
+                                            "center_brk4":"0",
+                                            "stagePadding_brk4":"0"
+                                        },
+
+
+                        carouselElement = $('.owl-carousel-<?php echo $blockUniquId?>'),
+
+                        windowWidth = $(window).width(),
+                        carouselWidth = carouselElement.width(),
+                        carouselContainer = carouselWidth + 120,
+
+                        items = ((slider_config.items >= 0 && slider_config.items != null) ? slider_config.items : 2),
+
+                        stagePadding = slider_config.stagePadding != '' ? parseInt(slider_config.stagePadding) : 0,
+
+                        sPBrk_1 = slider_config.stagePadding_brk1 != '' ? parseInt(slider_config.stagePadding_brk1) : 0,
+                        sPBrk_2 = slider_config.stagePadding_brk2 != '' ? parseInt(slider_config.stagePadding_brk2) : 0,
+                        sPBrk_3 = slider_config.stagePadding_brk3 != '' ? parseInt(slider_config.stagePadding_brk3) : 0,
+                        sPBrk_4 = slider_config.stagePadding_brk4 != '' ? parseInt(slider_config.stagePadding_brk4) : 0;
+
+                    carouselElement.owlCarousel({
+                        nav                 :parseInt(slider_config.nav) == 1 ? true : false,
+                        dots                :parseInt(slider_config.dots) == 1 ? true : false,
+                        center              :parseInt(slider_config.center) == 1 ? true : false,
+                        items               :items,
+                        loop                :parseInt(slider_config.loop) == 1 ? true : false,
+                        margin              :parseInt(slider_config.margin) != '' ? parseInt(slider_config.margin) : 0,
+                        stagePadding        :parseInt(slider_config.center) == 1 ? 0 : stagePadding,
+                        lazyLoad            :parseInt(slider_config.lazyLoad) == 1 ? true : false,
+                        autoplay            :parseInt(slider_config.autoplay) == 1 ? true : false,
+                        autoplayTimeout     :(slider_config.autoplayTimeout > 0 && slider_config.autoplayTimeout != null) ? parseInt(slider_config.autoplayTimeout) : 3000,
+                        autoplayHoverPause  :parseInt(slider_config.autoplayHoverPause) == 1 ? true : false,
+                        autoHeight          :false,
+
+
+                        responsive:{
+                            0:{
+                                nav             :parseInt(slider_config.nav_brk1) == 1 ? true : false,
+                                dots            :parseInt(slider_config.dots_brk1) == 1 ? true : false,
+                                items           :(slider_config.items_brk1  >= 0 && slider_config.items_brk1 != null) ? parseInt(slider_config.items_brk1) : items,
+                                center          :parseInt(slider_config.center_brk1) == 1 ? true : false,
+                                stagePadding    :parseInt(slider_config.center) == 1 ? 0 : sPBrk_1,
+                            },
+                            768:{
+                                nav             :parseInt(slider_config.nav_brk2) == 1 ? true : false,
+                                dots            :parseInt(slider_config.dots_brk2) == 1 ? true : false,
+                                items           :(slider_config.items_brk2  >= 0 && slider_config.items_brk2 != null) ? parseInt(slider_config.items_brk2) : items,
+                                center          :parseInt(slider_config.center_brk2) == 1 ? true : false,
+                                stagePadding    :parseInt(slider_config.center) == 1 ? 0 : sPBrk_2,
+                            },
+                            1024:{
+                                nav             :parseInt(slider_config.nav_brk3) == 1 ? true : false,
+                                dots            :parseInt(slider_config.dots_brk3) == 1 ? true : false,
+                                items           :(slider_config.items_brk3  >= 0 && slider_config.items_brk3 != null) ? parseInt(slider_config.items_brk3) : items,
+                                center          :parseInt(slider_config.center_brk3) == 1 ? true : false,
+                                stagePadding    :parseInt(slider_config.center) == 1 ? 0 : sPBrk_3,
+                            },
+                            1280:{
+                                nav             :parseInt(slider_config.nav_brk4) == 1 ? true : false,
+                                dots            :parseInt(slider_config.dots_brk4) == 1 ? true : false,
+                                items           :(slider_config.items_brk4  >= 0 && slider_config.items_brk4 != null) ? parseInt(slider_config.items_brk4) : items,
+                                center          :parseInt(slider_config.center_brk4) == 1 ? true : false,
+                                stagePadding    :parseInt(slider_config.center) == 1 ? 0 : sPBrk_4,
+                            }
+                        }
+                    });
+
+                    var carouselControls = carouselElement.find('.owl-nav');
+                    if (carouselContainer >= windowWidth) {
+                        carouselControls.find('.owl-prev').css({
+                            'left': 0,
+                            'top': -15
+                        });
+                        carouselControls.find('.owl-next').css({
+                            'right': 0,
+                            'top': -15
+                        });
+                    }
+                });
+            });
+    </script>
+<?php endif;?>

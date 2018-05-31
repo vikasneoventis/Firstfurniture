@@ -1,0 +1,32 @@
+{
+    "name": "xtento/module-advancedorderstatus",
+    "description": "XTENTO Advanced Order Status",
+    "require": {
+        "php": "~5.5.22|~5.6.0|7.0.2|7.0.4|~7.0.6",
+        "xtento/module-xtcore": "~2.0"
+    },
+    "type": "magento2-module",
+    "version": "2.0.8",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Xtento\\AdvancedOrderStatus\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "XTENTO GmbH & Co. KG",
+            "email": "info@xtento.com",
+            "homepage": "http://www.xtento.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "info@xtento.com"
+    }
+}

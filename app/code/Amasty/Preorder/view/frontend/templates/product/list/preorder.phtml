@@ -1,0 +1,28 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+?>
+<?php
+/**
+ * @var $block \Amasty\Preorder\Block\Product\ListProduct\Preorder
+ */
+?>
+
+<div class="amasty-preorder-note" preorder-product-id="<?php echo $block->getProduct()->getId();?>"><?php echo $block->getPreorderNote();?></div>
+<script type="text/javascript">
+    require(['jquery', 'Magento_Catalog/js/catalog-add-to-cart'], function($) {
+        var cartLabel = '<?=$block->getCartLabel();?>';
+        $('[preorder-product-id="<?php echo $block->getProduct()->getId();?>"]').parent().find('.tocart').each(function() {
+            $button = $(this);
+            while ($button.children().length > 0) {
+                $button = $button.children();
+                $.mage.catalogAddToCart.prototype.options.addToCartButtonTextDefault = cartLabel;
+                $button.html(cartLabel);
+            }
+        });
+    });
+</script>
+

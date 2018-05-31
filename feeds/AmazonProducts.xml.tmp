@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AmazonEnvelope xsi:noNamespaceSchemaLocation="amzn-envelope.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Header>
+    <DocumentVersion><![CDATA[1.01]]></DocumentVersion>
+    <MerchantIdentifier><![CDATA[YOUR_MERCHANT_ID_HERE]]></MerchantIdentifier>
+</Header>
+<MessageType><![CDATA[Product]]></MessageType>
+<PurgeAndReplace><![CDATA[false]]></PurgeAndReplace>

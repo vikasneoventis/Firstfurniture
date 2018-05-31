@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2016 www.magebuzz.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magebuzz_Timecountdown::css/owl.carousel.css"/>
+        <css src="Magebuzz_Timecountdown::css/simple.countdown.css" />
+        <!--<css src="Magebuzz_Timecountdown::css/colorful.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/flip.countdown.css" />-->
+        <css src="Magebuzz_Timecountdown::css/timer.css"/>
+    </head>
+    <body>
+<!--        <referenceContainer name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="custom.heads" template="custom_head.phtml" />
+        </referenceContainer>-->
+        <referenceContainer name="customheader-nav">
+            <block class="Magebuzz\Timecountdown\Block\Carousel" name="timecountdown.homepage.carousel" 
+                   template="carousel.phtml" ifconfig="timecountdown/general/show_in_homepage" cacheable="false" after="-" />
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magebuzz\Timecountdown\Block\Timecountdown" name="timecountdown.homepage.js"
+                   template="timer.phtml" ifconfig="timecountdown/general/show_in_homepage" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

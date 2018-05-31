@@ -1,0 +1,12 @@
+<?php
+// Get Current product
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+
+$category = $block->getAllCategories($product->getId());
+?>
+<?php if($category):?>
+    <a href="<?php echo $category->getUrl()?>" class="text-center" style="background-color: #f5f5f5; color: #de0e8a; font-weight: bold;">
+        <b>View All <?php echo $category->getName()?></b>
+    </a>
+<?php endif;?>

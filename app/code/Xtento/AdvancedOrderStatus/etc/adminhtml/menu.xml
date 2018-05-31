@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Xtento_AdvancedOrderStatus::configuration" title="Advanced Order Status" module="Xtento_AdvancedOrderStatus" sortOrder="10" parent="Xtento_XtCore::extensions" action="adminhtml/system_config/edit/section/advancedorderstatus" resource="Xtento_AdvancedOrderStatus::configuration"/>
+    </menu>
+</config>
+<!--
+/**
+ * Product:       Xtento_AdvancedOrderStatus (2.0.8)
+ * ID:            VWr/9REjZDQhBVdZRTowyNozwhIes3xEpdPbOm7d5OI=
+ * Packaged:      2017-06-14T12:06:11+00:00
+ * Last Modified: 2016-02-25T18:56:21+00:00
+ * File:          app/code/Xtento/AdvancedOrderStatus/etc/adminhtml/menu.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

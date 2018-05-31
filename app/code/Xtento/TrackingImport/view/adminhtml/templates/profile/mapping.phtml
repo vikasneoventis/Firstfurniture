@@ -1,0 +1,38 @@
+<?php
+$formHtml = $block->getFormHtml();
+$mappingHtml = $block->getMappingHtml();
+if (\Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\Registry')->registry(
+        'trackingimport_xml_fields_warning'
+    ) !== null
+) {
+    echo '<div id="messages"><ul class="messages"><li class="error-msg"><ul><li><span>' . \Magento\Framework\App\ObjectManager::getInstance(
+        )->get('Magento\Framework\Registry')->registry('trackingimport_xml_fields_warning') . '. ' . __(
+            'Please fix and re-save profile.'
+        ) . '</span></li></ul></li></ul></div>';
+}
+?>
+<div class="entry-edit">
+    <?php echo $formHtml; ?>
+    <fieldset class="fieldset admin__fieldset fieldset-wide" style="padding-bottom:0">
+        <legend class="admin__legend legend">
+            <span><?php echo __('File Mapping') ?></span>
+        </legend>
+    </fieldset>
+    <?php echo $mappingHtml; ?>
+</div>
+<style type="text/css">
+    #row_mapping label {
+        width: 100px;
+    }
+
+    #row_mapping .label {
+        width: 110px;
+    }
+
+    #grid_mapping .scalable {
+        width: 100%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+</style>
+<?php echo $block->getChildHtml('form_after'); ?>

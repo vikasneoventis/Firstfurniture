@@ -1,0 +1,41 @@
+.bss-checkbox-undo, .bss-checkbox-del, .bss-checkbox-null {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    z-index: 2;
+}
+.bss-checkbox-undo:hover:before {
+    content: '\e634';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+    cursor: pointer;
+}
+.bss-checkbox-del:hover:before {
+    content: '\e632';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+    cursor: pointer;
+}
+.bss-checkbox-undo img, .bss-checkbox-null img, .bss-checkbox-del:hover img {
+    display: none;
+}
+.bss-upload-button {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 37px;
+    z-index: 2;
+    cursor: pointer;
+}
+.bss-upload-button::before {
+    content: '\e635';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+}
+.bss-upload-field input {
+    display: none;
+}
+.bss-upload-field {
+    width: 70px;
+    position: absolute;
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="shiv_categoryslider" class="Shiv\CategorySlider\Block\Category\CategoryList" is_email_compatible="true">
+        <label translate="true">Category Listing - Category Slider</label>
+        <description translate="true">List of Sub Categories</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="id_name" xsi:type="text" required="true" visible="true">
+                <label translate="true">Unique Id</label>
+                <description translate="true">Unique id for listing of Category.</description>
+            </parameter>
+            <parameter name="is_slider" xsi:type="select" required="true" visible="true">
+                <label translate="true">List Category Type</label>
+                <options>
+                    <option name="with_slider" value="slider" selected="true">
+                        <label translate="true">Slider</label>
+                    </option>
+                    <option name="with_out_slider" value="no_slider">
+                        <label translate="true">Normal Listing</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="filter_template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="categoryslider/widget/content/default_template.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                    <option name="item1" value="custom">
+                        <label translate="true">Custom Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" required="true" visible="true">
+                <label translate="true">Custom template</label>
+                <depends>
+                    <parameter name="filter_template" value="custom" />
+                </depends>
+                <value>template_name.phtml</value>
+            </parameter>
+            
+            <parameter name="cache_lifetime" xsi:type="text" visible="true">
+                <label translate="true">Cache Lifetime (Seconds)</label>
+                <description translate="true">86400 by default, if not set. To refresh instantly, clear the Blocks HTML Output cache.</description>
+            </parameter>
+            <parameter name="id_path" xsi:type="block" visible="true" required="true" sort_order="10">
+                <label translate="true">Category</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Category\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+        </parameters>
+        
+    </widget>
+</widgets>

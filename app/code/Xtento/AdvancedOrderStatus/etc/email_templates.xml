@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="advancedorderstatus_notification" label="Advanced Order Status - Notification" file="advancedorderstatus_update.html" type="html" module="Xtento_AdvancedOrderStatus" area="frontend"/>
+</config>
+
+<!--
+/**
+ * Product:       Xtento_AdvancedOrderStatus (2.0.8)
+ * ID:            VWr/9REjZDQhBVdZRTowyNozwhIes3xEpdPbOm7d5OI=
+ * Packaged:      2017-06-14T12:06:11+00:00
+ * Last Modified: 2016-04-19T15:46:33+00:00
+ * File:          app/code/Xtento/AdvancedOrderStatus/etc/email_templates.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

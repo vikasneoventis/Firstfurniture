@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\CatalogInventory\Model\Source\Backorders">
+        <plugin name="Amasty_Preorder::toOptionArray" type="Amasty\Preorder\Plugin\CatalogInventoryBackorders" />
+    </type>
+    <type name="\Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="Amasty_Preorder::stockState" type="Amasty\Preorder\Plugin\StockStateProvider" />
+    </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="\Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <plugin name="Amasty_Preorder::injectCollection" type="Amasty\Preorder\Plugin\UiSearchResult" />
+    </type>
+
+    <type name="\Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Inventory">
+        <plugin name="Amasty_Preorder::addPreOrderFields" type="Amasty\Preorder\Plugin\ProductEditTabInventory" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Inventory">
+        <plugin name="Amasty_Preorder::addPreOrderFields" type="Amasty\Preorder\Plugin\ProductMassEditTabInventory" />
+    </type>
+
+    <type name="\Magento\Sales\Model\Order\Item">
+        <plugin name="Amasty_Preorder::addPreorderLabel" type="Amasty\Preorder\Plugin\SalesOrderItem" />
+    </type>
+    <virtualType name="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="Magento\Catalog\Block\Product\ListProduct">
+        <arguments>
+            <argument name="catalogLayer" xsi:type="object">Magento\Catalog\Model\Layer\Search</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Amasty_Preorder::addPreorderLabelToCatalogList" type="Amasty\Preorder\Plugin\ProductList\Catalog" />
+    </type>
+    <type name="Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="Amasty_Preorder::addPreorderLabelToWidgetList" type="Amasty\Preorder\Plugin\ProductList\Widget" />
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin name="Amasty_Preorder::savePreOrderField" type="Amasty\Preorder\Plugin\ProductSave" />
+    </type>
+
+    <type name="Magento\Quote\Model\Cart\Totals">
+        <plugin name="Amasty_Preorder::Totals" type="Amasty\Preorder\Plugin\Quote\Model\Totals" />
+    </type>
+</config>

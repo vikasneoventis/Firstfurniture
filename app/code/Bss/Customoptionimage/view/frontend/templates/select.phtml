@@ -1,0 +1,51 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+?> 
+
+<?php
+$productId = $block->getProduct()->getId();
+$option = $block->getOption();
+$class = ($option->getIsRequire()) ? ' required' : '';
+?>
+<div id="bss_options_<?php echo $option->getId() ?>" class="field<?php  echo $class; ?>">
+    <label class="label" for="select_<?php echo $option->getId() ?>">
+        <span><?php echo  $block->escapeHtml($option->getTitle()) ?></span>
+        <?php  echo $block->getBssCustomOptionBlock('after_title'); ?>
+    </label> 
+    <?php echo $block->getBssCustomOptionBlock('before_control'); ?>
+    <div class="control">
+        <?php echo $block->getValuesHtml() ?>
+        <?php if ($option->getIsRequire()): ?>
+            <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_RADIO
+                || $option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_CHECKBOX): ?>
+                <span id="options-<?php  echo $option->getId() ?>-container"></span>
+            <?php endif; ?>
+        <?php endif;?>
+    </div>
+    <?php  echo $block->getBssCustomOptionBlock('after_control'); ?>
+</div>

@@ -1,0 +1,32 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var \Aheadworks\Autorelated\Block\Adminhtml\Rule\Container $block */
+?>
+<?php foreach ($block->getListingTypeSource() as $typeSource): ?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title"></div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item" style="float: left; width: calc( (100%) * 0.25 - 30px );">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo $block->escapeHtml($typeSource['title']) ?></span>
+            </div>
+            <div class="admin__page-section-item-content aheadworks-container-listing-desc">
+                <div><?php echo $block->escapeHtml($typeSource['description']) ?></div>
+            </div>
+        </div>
+        <div class="admin__page-section-item" style="float: right; width: calc( (100%) * 0.75 - 30px );">
+            <div class="admin__page-section-item-content">
+                <div data-type="<?php /* @noEscape */ echo $typeSource['type'] ?>">
+                    <?php /* @noEscape */ echo $this->getChildBlock('container_listing_renderer')->render($typeSource['type']) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endforeach; ?>

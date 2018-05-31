@@ -1,0 +1,35 @@
+Xtento_AdvancedOrderStatus
+
+-------------
+  CHANGELOG
+-------------
+
+===== 2.0.0 =====
+ * Initial stable M2 release
+
+===== 2.0.1 =====
+ * Fixed error when removing notifications/a status
+
+===== 2.0.2 =====
+ * Compatibility with Magento 2.0.2
+ * Several code optimizations, code cleanup
+ * Updated Xtento_XtCore
+
+===== 2.0.3 =====
+ * Updated Xtento_XtCore to 2.0.3
+
+===== 2.0.4 =====
+ * Bugfix for adding comments to the order status history
+ * Added missing email template
+
+===== 2.0.5 =====
+ * Compatibility with Magento 2.1.0 established
+
+===== 2.0.6 =====
+ * Updated composer.json to require XTENTO "XtCore" base module
+
+===== 2.0.7 =====
+ * Fixed mass actions; if a filter was used on a grid (and also sometimes in combination with "select all") then eventually all orders/none were exported
+
+===== 2.0.8 =====
+ * Updated Xtento_XtCore to version 2.0.7 ("Added warning in module configuration at System > Configuration if module output is disabled via "Disable Module Output" at System > Configuration > Advanced > Advanced")

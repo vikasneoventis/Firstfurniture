@@ -1,0 +1,22 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var \Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\Actions $block */
+?>
+
+<div class="btn-group">
+    <?php foreach ($block->getButtons() as $button): ?>
+        <a data-mage-init='{"awArpListingAction" : {}}'
+           data-url="<?php /* @noEscape */ echo $button['url'] ?>"
+           class="btn <?php /* @noEscape */ echo $button['class'] ?>"
+           data-confirmation="<?php /* @noEscape */ echo $button['confirmation'] ?>"
+           data-listing-type="<?php /* @noEscape */ echo $button['listingType'] ?>">
+            <?php echo /* @noEscape */ $button['content'] ?>
+        </a>
+    <?php endforeach; ?>
+</div>

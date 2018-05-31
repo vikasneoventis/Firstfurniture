@@ -1,0 +1,104 @@
+<?php
+$style = $block->getScopeConfig('timecountdown/general/style_select');
+$jsRequireName = '';
+if ($style == 'simple') {
+    $jsRequireName = '"simple_style"';
+} else if ($style == 'colorful') {
+    $jsRequireName = '"colorful_style"';
+} else if ($style == 'flip') {
+    $jsRequireName = '"flip_style"';
+}
+
+$pageType = $block->getPageType();
+if ($pageType == 'product') {
+    $product = $block->getProduct();
+    $isDisplayCountdown = $block->isPriceCountdown($product);
+    if ($isDisplayCountdown) {
+        $toDate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : '';
+        ?>
+        <div class="mb-timecountdown-container timer-product timer-<?php echo $style; ?>" 
+             data-todate="<?php echo $toDate; ?>">
+            <div class="timer-heading"><?php echo __('PRICE COUNTDOWN'); ?></div>
+            <div class="timer-countbox" id="price-countdown-<?php echo $product->getId(); ?>"></div>
+        </div>
+        <?php
+    }
+}
+?>
+<script type="text/javascript">
+    'use strict';
+    require(['jquery', <?php if ($jsRequireName != '') {echo $jsRequireName;} ?>], function ($) {
+        $(document).ready(function () {
+            $('.mb-timecountdown-container').each(function () {
+                var toDate = $(this).data('todate');
+                if (toDate != '') {
+                    var nowTime = Math.round((new Date()).getTime()/1000)
+                    var remainTime = toDate - nowTime + (new Date).getTimezoneOffset() * 60;
+                    if (remainTime > 0) {
+                        var style = '<?php echo $style; ?>';
+                        if (style == 'simple') {
+                            $(this).children('.timer-countbox').countdown({until: remainTime});
+							
+                        } else if (style == 'colorful') {
+                            toDate = new Date(toDate * 1000);
+                            var toDateStr = toDate.getUTCFullYear() + '/' + (parseInt(toDate.getUTCMonth())+1) + '/' + toDate.getUTCDate();
+                            $(this).children('.timer-countbox').countdowntimer({
+                                dateAndTime : toDateStr
+                            });
+
+                        } else if (style == 'flip') {
+                            var pageType = '<?php echo $pageType; ?>';
+                            if (pageType == 'product') {
+                                var size = 'md';
+                            } else if (pageType == 'category') {
+                                var size = 'sm';
+                            } else if (pageType == 'homepage-one'){
+                                var size = 'md';
+                            } else {
+                                var size = 'xs';
+                            }
+                            var newHtml = '<table class="timer-tb timer-tb-'+size+'">'
+                                newHtml += '<tr><td class="timer-lbl timer-lbl-day">Days</td>'
+                                newHtml += '<td class="timer-lbl timer-lbl-hour">Hours</td>'
+                                newHtml += '<td class="timer-lbl">Minutes</td>'
+                                newHtml += '<td class="timer-lbl">Seconds</td>'
+                                newHtml += '<td></td></tr>'
+                                newHtml += '<tr><td colspan="4"><span class="timer-countbox"></span></td></tr>'
+                                newHtml += '</table>';
+                            $(this).children('.timer-countbox').replaceWith(newHtml);
+                            
+                            $(this).find('.timer-countbox').flipcountdown({
+                                size: size,
+                                // beforeDateTime:'1/01/2017 00:00:01',
+                                tick: function(){
+                                    var nol = function(h){
+                                            return h>9?h:'0'+h;
+                                    }
+                                    var range  = toDate - Math.round((new Date()).getTime()/1000) + (new Date).getTimezoneOffset() * 60,
+                                        secday = 86400, sechour = 3600,
+                                        days = parseInt(range/secday),
+                                        hours = parseInt((range%secday)/sechour),
+                                        min	= parseInt(((range%secday)%sechour)/60),
+                                        sec	= ((range%secday)%sechour)%60;
+                                    var result = nol(min)+' '+nol(sec);
+                                    if (hours > 0) {
+                                        result = nol(hours) + ' ' + result;
+                                    } else {
+                                        $(this).closest('.mb-timecountdown-container').find('.timer-lbl-hour').remove();
+                                    }
+                                    if (days > 0) {
+                                        result = nol(days) + ' ' + result;
+                                    } else {
+                                        $(this).closest('.mb-timecountdown-container').find('.timer-lbl-day').remove();
+                                    }
+                                    return result;
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+
+        });
+    });
+</script>

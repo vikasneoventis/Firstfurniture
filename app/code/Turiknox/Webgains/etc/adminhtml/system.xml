@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * Turiknox_Webgains
+
+ * @category   Turiknox
+ * @package    Turiknox_Webgains
+ * @copyright  Copyright (c) 2017 Turiknox
+ * @license    https://github.com/Turiknox/magento2-webgains-tracking/blob/master/LICENSE.md
+ * @version    1.0.0
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="turiknox" sortOrder="1000">
+            <label>Turiknox</label>
+        </tab>
+        <section id="webgains" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Webgains Tracking</label>
+            <tab>turiknox</tab>
+            <resource>Turiknox_Webgains::config</resource>
+            <group id="general" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="program_id" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Program ID</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="event_id" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Event ID</label>
+                    <validate>validate-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

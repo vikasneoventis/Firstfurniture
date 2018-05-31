@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Autorelated\Block\Adminhtml\Rule\Container" name="aw_autorelated.rule_container">
+                <arguments>
+                    <argument name="listing_type_source" xsi:type="options" model="Aheadworks\Autorelated\Model\Source\Type"/>
+                </arguments>
+                <block class="Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing" name="container_listing_renderer">
+                    <arguments>
+                        <argument name="columns" xsi:type="array">
+                            <item name="code" xsi:type="array">
+                                <item name="header" xsi:type="string">Name</item>
+                                <item name="renderer" xsi:type="string">Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\Name</item>
+                            </item>
+                            <item name="position" xsi:type="array">
+                                <item name="header" xsi:type="string">Position</item>
+                                <item name="renderer" xsi:type="string">Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\Position</item>
+                            </item>
+                            <item name="product_condition_type" xsi:type="array">
+                                <item name="header" xsi:type="string">Display Mode</item>
+                                <item name="header_renderer" xsi:type="string">Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\Header\ProductConditionType</item>
+                                <item name="renderer" xsi:type="string">Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\ProductConditionType</item>
+                            </item>
+                            <item name="priority" xsi:type="array">
+                                <item name="header" xsi:type="string">Priority</item>
+                            </item>
+                            <item name="view_count" xsi:type="array">
+                                <item name="header" xsi:type="string">Views</item>
+                            </item>
+                            <item name="click_count" xsi:type="array">
+                                <item name="header" xsi:type="string">Clicks</item>
+                            </item>
+                            <item name="ctr" xsi:type="array">
+                                <item name="header" xsi:type="string">CTR</item>
+                                <item name="renderer" xsi:type="string">Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing\Column\Renderer\Ctr</item>
+                            </item>
+                            <item name="actions" xsi:type="array">
+                                <item name="header" xsi:type="string" />
+                                <item name="type" xsi:type="string">actions</item>
+                                <item name="actions_button" xsi:type="array">
+                                    <item name="status" xsi:type="array">
+                                        <item name="css_class" xsi:type="string">action-status</item>
+                                        <item name="url" xsi:type="string">autorelated_admin/rule/changeStatus</item>
+                                        <item name="status_field_name" xsi:type="string">status</item>
+                                    </item>
+                                    <item name="delete" xsi:type="array">
+                                        <item name="css_class" xsi:type="string">action-delete</item>
+                                        <item name="url" xsi:type="string">autorelated_admin/rule/delete</item>
+                                        <item name="confirm_message" xsi:type="string">Are you sure?</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                        <argument name="primary_field_name" xsi:type="string">id</argument>
+                        <argument name="type_field_name" xsi:type="string">type</argument>
+                        <argument name="collection_class_name" xsi:type="string">Aheadworks\Autorelated\Model\ResourceModel\Rule\Collection</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

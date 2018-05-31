@@ -1,0 +1,131 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<img src="//drs2.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=811818e7-45bf-4db7-a40e-c1077dfbdddd" width="1" height="1"/>
+<div class="checkout-success">
+<div class="page-title">
+    <h1><?php echo __('Your order has been received.') ?></h1>
+	<h2 class="sub-title"><?php echo __('Thank you for your purchase!') ?></h2>
+</div>
+    <?php if ($block->getOrderId()):?>
+        <?php if ($block->getCanViewOrder()) :?>
+            <p><?php echo __('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
+        <?php  else :?>
+            <p><?php echo __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
+        <?php endif;?>
+            <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>
+    <?php endif;?>
+
+    <?php echo $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Continue Shopping') ?></span></a>
+        </div>
+    </div>
+</div>
+
+<!-- Conversion Code for Google shopping, webgains, criteo--->
+					
+<!---- Onefeed Tracking Code ----> 
+<?php 
+//------------------------------------------- 
+// GET MAGENTO ORDER VALUES FOR TRACKING CODE 
+//------------------------------------------- 
+$order_details = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId()); 
+$sale_subtotal = number_format($order_details->subtotal,2); // GETS THE SUB TOTAL NOT INCLUDING TAX AND SHIPPING 
+$sale_grandtotal = number_format($order_details->getGrandTotal(),2); // GETS THE GRAND TOTAL INCLUDING TAX AND SHIPPING 
+$sale_taxtotal = number_format($order_details->getTaxAmount(),2); // GETS THE TAX TOTAL 
+$sale_shippingtotal = number_format($order_details->getShippingAmount(),2); // GETS THE SHIPPING TOTAL 
+?> 
+
+<script type="text/javascript" language="javascript"> 
+var of_ssid = '117-1'; 
+var cs = '<?php echo $sale_subtotal ?>'; 
+var oi = '<?php echo $this->getOrderId(); ?>'; 
+var it = 1; 
+</script> 
+
+<script type="text/javascript" language="javascript" src="https://tracking.onefeed.co.uk/t.js"></script> 
+<noscript> 
+<img border="0" src="https://tracking.onefeed.co.uk/ProcessProductCheckout.ashx?of_ssid=117-1&cs=&lt;?php echo $sale_subtotal ?>&it=1&oi=<?php echo $this->getOrderId(); ?>" /> 
+</noscript>
+
+<!---- End Onefeed Tracking Code ---->
+<!-- <webgains tracking code> -->
+<script language="javascript" type="text/javascript">
+
+var wgOrderReference = "<?php echo $this->escapeHtml($this->getOrderId()); ?>";
+var wgOrderValue = "<?php echo $total ?>";
+var wgEventID = "8311";
+var wgComment = "";
+var wgLang = "en_EN";
+var wgsLang = "javascript-client";
+var wgVersion = "1.2";
+var wgProgramID = "5228";
+var wgSubDomain = "track";
+var wgCheckSum = "";
+var wgItems = "";
+var wgVoucherCode = "";
+var wgCustomerID = "";
+var wgCurrency = "GBP";
+
+if(location.protocol.toLowerCase() == "https:") wgProtocol="https";
+else wgProtocol = "http";
+wgUri = wgProtocol + "://" + wgSubDomain + ".webgains.com/transaction.html" + "?wgver=" + wgVersion + "&wgprotocol=" + wgProtocol + "&wgsubdomain=" + wgSubDomain + "&wgslang=" + wgsLang + "&wglang=" + wgLang + "&wgprogramid=" + wgProgramID + "&wgeventid=" + wgEventID + "&wgvalue=" + wgOrderValue + "&wgchecksum=" + wgCheckSum + "&wgorderreference="  + wgOrderReference + "&wgcomment=" + escape(wgComment) + "&wglocation=" + escape(document.referrer) + "&wgitems=" + escape(wgItems) + "&wgcustomerid=" + escape(wgCustomerID) + "&wgvouchercode=" + escape(wgVoucherCode) + "&wgCurrency=" + escape(wgCurrency);
+document.write('<sc'+'ript language="JavaScript"  type="text/javascript" src="'+wgUri+'"></sc'+'ript>');
+</script>
+
+<?php
+$sOrderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$oOrder = Mage::getModel('sales/order')->loadByIncrementId($sOrderId);
+$orderItems = $oOrder->getAllItems();
+//echo count($oOrder->getAllItems());
+//$purchasedSkus = array();
+
+//echo $purchasedSkus[] = $orderItem->getSku();
+//$oOrder->getGrandTotal();
+//$oOrder->getAllItems();
+?>
+
+<noscript>
+<img src="http://track.webgains.com/transaction.html?wgver=1.2&wgprogramid=5228&wgrs=1&wgvalue=<?php echo $total ?>&wgeventid=8311&wgorderreference=<?php echo $this->escapeHtml($this->getOrderId()); ?>&wgitems=<?php echo count($oOrder->getAllItems());?>&wgvouchercode=<?php echo $couponCode = $oOrder->coupon_code;?>&wgcustomerid = <?php echo $oOrder->getCustomerName();?>&wgCurrency=<?php echo $oOrder->getOrderCurrencyCode();?>" alt="" />
+</noscript>
+<!-- </webgains tracking code> -->
+<?php
+$sOrderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$oOrder = Mage::getModel('sales/order')->loadByIncrementId($sOrderId);
+$_items = $oOrder->getAllItems();
+?>
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+{ event: "setAccount", account: 5719 },
+{ event: "setSiteType", type: "d" },
+{ event: "setEmail", email: "<?php echo $oOrder->getCustomerEmail();?>" },
+{ event: "trackTransaction", id: "<?php echo $this->escapeHtml($this->getOrderId()); ?>", item: [
+<?php
+
+foreach($_items as $item)
+{
+			$productId = '"'.$item->getId().'"';
+			$productPrice = number_format($item->getPrice(),2);
+			//number_format($oOrder->getGrandTotal(),2);
+			$qty = number_format($item->getData('qty_ordered'),0);
+	 
+echo "{ id: " . $productId .", price: ". $productPrice.", quantity:".$qty."},";
+
+}
+?>	
+
+]}
+);
+</script>

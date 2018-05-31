@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Xtento\TrackingImport\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Xtento\TrackingImport\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">xtentoLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Xtento\TrackingImport\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="xtentoTrackingImportImportCommand" xsi:type="object">Xtento\TrackingImport\Console\Command\ImportCommand</item>
+                <item name="xtentoTrackingImportConfigExportCommand" xsi:type="object">Xtento\TrackingImport\Console\Command\ConfigExportCommand</item>
+                <item name="xtentoTrackingImportConfigImportCommand" xsi:type="object">Xtento\TrackingImport\Console\Command\ConfigImportCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
+<!--
+/**
+ * Product:       Xtento_TrackingImport (2.1.9)
+ * ID:            4wmf19Yp9HCIHo7KOs8fxcH61vi7Ff3lLVajZHUke48=
+ * Packaged:      2017-06-14T12:47:31+00:00
+ * Last Modified: 2017-04-27T20:00:23+00:00
+ * File:          app/code/Xtento/TrackingImport/etc/di.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

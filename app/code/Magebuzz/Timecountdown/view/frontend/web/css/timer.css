@@ -1,0 +1,76 @@
+/*General*/
+.mb-timecountdown-container {
+    margin-bottom: 10px;
+}
+.mb-timecountdown-container .timer-heading {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+.mb-timecountdown-container .timer-countbox{
+    box-sizing: border-box;
+}
+
+/*Homepage*/
+.mb-timecountdown-container.timer-homepage {
+    margin-top: -25px;
+}
+.mb-timecountdown-container.timer-homepage-one .timer-heading {
+    font-size: 20px;
+}
+
+/*Simple Style*/
+.mb-timecountdown-container.timer-simple .timer-countbox{
+    min-height: 50px;
+}
+.mb-timecountdown-container.timer-simple.timer-product .timer-countbox{
+    width: 50%;
+}
+.mb-timecountdown-container.timer-simple.timer-homepage-one .timer-countbox{
+    /*width: 30%;*/
+}
+
+/*Colorful Style*/
+.mb-timecountdown-container.timer-colorful .timer-countbox{
+    text-align: center;
+    font-size: 20px;
+}
+.mb-timecountdown-container.timer-colorful.timer-product .timer-countbox, .mb-timecountdown-container.timer-colorful.timer-homepage-one .timer-countbox{
+    font-size: 30px;
+}
+.mb-timecountdown-container.timer-colorful.timer-product .timer-countbox{
+    width: 50%;
+}
+.mb-timecountdown-container.timer-colorful.timer-homepage-one .timer-countbox{
+    width: 30%;
+}
+
+/*Flip Style*/
+.mb-timecountdown-container.timer-flip .timer-tb {
+    border:0;
+}
+.mb-timecountdown-container.timer-flip table td {
+    padding: 0;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-md .timer-lbl {
+    width: 72px;
+    padding-right: 10px;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-sm .timer-lbl {
+    width: 48px;
+    font-size: 80%;
+    padding-right: 10px;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-xs .timer-lbl {
+    width: 32px;
+    font-size: 55%;
+    padding-right: 5px;
+}
+.mb-timecountdown-container.timer-flip .timer-lbl {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+}
+

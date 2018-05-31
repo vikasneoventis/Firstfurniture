@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Xtento_AdvancedOrderStatus" setup_version="2.0.8">
+        <sequence>
+            <module name="Magento_Backend"/>
+            <module name="Magento_Store"/>
+            <module name="Magento_Sales"/>
+            <module name="Xtento_XtCore"/>
+        </sequence>
+    </module>
+</config>
+<!--
+/**
+ * Product:       Xtento_AdvancedOrderStatus (2.0.8)
+ * ID:            VWr/9REjZDQhBVdZRTowyNozwhIes3xEpdPbOm7d5OI=
+ * Packaged:      2017-06-14T12:06:11+00:00
+ * Last Modified: 2017-05-12T12:58:38+00:00
+ * File:          app/code/Xtento/AdvancedOrderStatus/etc/module.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

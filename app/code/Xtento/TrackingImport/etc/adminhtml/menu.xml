@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Xtento_TrackingImport::configuration" title="Tracking Number Import" module="Xtento_TrackingImport" sortOrder="180" parent="Xtento_XtCore::extensions" action="adminhtml/system_config/edit/section/trackingimport" resource="Xtento_TrackingImport::configuration"/>
+        <add id="Xtento_TrackingImport::menu" title="Tracking Import" module="Xtento_TrackingImport" sortOrder="101" parent="Magento_Sales::sales" action="xtento_trackingimport/index/index" resource="Xtento_TrackingImport::menu"/>
+        <add id="Xtento_TrackingImport::manual" title="Manual Import" module="Xtento_TrackingImport" sortOrder="10" parent="Xtento_TrackingImport::menu" action="xtento_trackingimport/manual/index" resource="Xtento_TrackingImport::manual"/>
+        <add id="Xtento_TrackingImport::log" title="Execution Log" module="Xtento_TrackingImport" sortOrder="20" parent="Xtento_TrackingImport::menu" action="xtento_trackingimport/log/index" resource="Xtento_TrackingImport::log"/>
+        <add id="Xtento_TrackingImport::profile" title="Import Profiles" module="Xtento_TrackingImport" sortOrder="30" parent="Xtento_TrackingImport::menu" action="xtento_trackingimport/profile/index" resource="Xtento_TrackingImport::profile"/>
+        <add id="Xtento_TrackingImport::source" title="Import Sources" module="Xtento_TrackingImport" sortOrder="40" parent="Xtento_TrackingImport::menu" action="xtento_trackingimport/source/index" resource="Xtento_TrackingImport::source"/>
+    </menu>
+</config>
+<!--
+/**
+ * Product:       Xtento_TrackingImport (2.1.9)
+ * ID:            4wmf19Yp9HCIHo7KOs8fxcH61vi7Ff3lLVajZHUke48=
+ * Packaged:      2017-06-14T12:47:31+00:00
+ * Last Modified: 2017-01-25T13:04:16+00:00
+ * File:          app/code/Xtento/TrackingImport/etc/adminhtml/menu.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

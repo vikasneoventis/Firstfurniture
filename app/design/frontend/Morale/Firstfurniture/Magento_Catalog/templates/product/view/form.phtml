@@ -1,0 +1,240 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_helper = $this->helper('Magento\Catalog\Helper\Output'); ?>
+<?php $_product = $block->getProduct(); ?>
+<div class="product-add-form">
+    <?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $productStockObj = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($_product->getId());
+    ?>
+    <form action="<?php /* @escapeNotVerified */ echo $block->getSubmitUrl($_product) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <?php echo $block->getBlockHtml('formkey')?>
+        <?php echo $block->getChildHtml('form_top'); ?>
+        <?php if (!$block->hasOptions()):?>
+            <?php echo $block->getChildHtml('product_info_form_content'); ?>
+        <?php else:?>
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1'):?>
+                <?php echo $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2'):?>
+            <?php echo $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+        <?php echo $block->getChildHtml('form_bottom'); ?>
+    </form>
+</div>
+<span class="label deliverytime"><?php echo __('Delivery Time :')?></span>
+                <span class="clr-pink">
+				  <?php  $attr = $_product->getResource()->getAttribute('leadtime');?>
+                  <?php //echo $attr->getSource()->getOptionText($_product->getLeadtime())?>
+                  <?php if($attr->usesSource()):?>
+                    <?php echo $attr->getSource()->getOptionText($_product->getLeadtime());?></span>&nbsp;&nbsp;<span style="text-decoration:blink;"></span>
+				<?php endif;?><br/>
+<div class="reasontobuy" style="color:#000; background-color:whitesmoke; padding:5px;">
+<span style="font-size:16px;"><strong>Reasons To Buy From Us</strong><br/></span>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> FREE Delivery UK Mainland *</span><br/>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> Volume Discount</span><br/>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> Price Promise</span><br/>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> 100% Secure Checkout</span><br/>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> Hassle Free Returns</span><br/>
+<span style="line-height: 3.3rem;font-size:16px;"><i class="fa fa-check greenicon"></i> Need Assistance? Call: 0800 975 0508</span><br/>
+</div><br/>
+<table style="border-border: 1px solid #ddd; margin-bottom: 10px; padding: 0px 0px 15px 0px;">
+    <tr>
+        <td style="background-color:#f5f5f5; color:#de0e8a; text-align: center; border: 1px solid #c1c1c1;">
+            <?php echo $this->getChildHtml('productcategoryinfo');?>
+        </td>
+    </tr>
+</table>
+<script>
+    require([
+        'jquery',
+        'priceBox',
+        'Magento_Catalog/js/price-utils'
+    ], function($){
+        var dataPriceBoxSelector = '[data-role=priceBox]',
+            dataProductIdSelector = '[data-product-id=<?php echo $block->escapeHtml($_product->getId())?>]',
+            priceBoxes = $(dataPriceBoxSelector + dataProductIdSelector);
+
+        priceBoxes = priceBoxes.filter(function(index, elem){
+            return !$(elem).find('.price-from').length;
+        });
+
+        priceBoxes.priceBox({'priceConfig': <?php /* @escapeNotVerified */ echo $block->getJsonConfig() ?>});
+        $('.page-title-wrapper .page-title').click(function(){
+            $('#AOPriceMatch').toggleClass('hide');
+        });
+        $(document).mouseup(function(e) 
+        {
+            var container = $(".page-title-wrapper");
+        
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                $('#AOPriceMatch').addClass('hide');
+            }
+        });
+        //$(document).on("change", ".product-custom-option", function(){ alert("d");
+        $(".product-custom-option").change(function(){ 
+            var currencySymbol = $("#final-price-span").attr('data-currency');
+            var productPriceCustom = parseInt($("#final-price-span").attr('data-actual-price'));
+            $(".product-custom-option").each(function() {
+                var customoptionPrice = parseInt($(this).find(':selected').attr('price'));
+                if(isNaN(customoptionPrice)) {
+                    
+                }
+                else
+                {
+                    var formatedPrice = customoptionPrice+productPriceCustom;
+                    //$("#final-price-span").html(customoptionPrice+productPriceCustom);
+                    $("#final-price-span").attr('data-price', formatedPrice);
+                    var displayPrice = parseFloat($("#final-price-span").attr('data-price'), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString()
+                    $("#final-price-span").text(currencySymbol+ displayPrice);
+                }
+                
+            });
+        });
+        $(".super-attribute-select").change(function(){
+            var optionSelected ='';
+            var i=0;
+            var totalOption=0;
+            $(".super-attribute-select").each(function() {
+                if(i==0)
+                {
+                    optionSelected = $(this).val();
+                    totalOption++;
+                }
+                else if($(this).val() != '')
+                {
+                    optionSelected = optionSelected+","+$(this).val();
+                    totalOption++;
+                }
+                i++;
+            });
+            if(optionSelected != '' && i == totalOption)
+            {
+                
+                $.ajax({
+                    url: '<?php echo $block->getBaseUrl() ?>getoptionprice.php',
+                    type: 'POST',
+                    data: { productId : '<?php echo $_product->getId()?>', option_selected : optionSelected},
+                    success: function(data) {
+                        $('#final-price-span').html(data)
+                    }
+               });
+            }
+            else
+            {
+                var productprice = parseFloat($('#final-price-span').attr('data-actual-price'));
+                $('#final-price-span').html($('#final-price-span').attr('data-currency')+productprice.toFixed(2));
+            }
+        });
+        var secondLastChile = $( ".breadcrumbs ul li:nth-last-child(2)" ).find('a');
+        $("a#view-prev-cat").attr('href', secondLastChile.attr('href'));
+        $("a#view-prev-cat").html($( "a#view-prev-cat" ).html()+secondLastChile.html());
+    });
+</script>
+<div id="pricepromiseModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <!--<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><?php //echo __('Why Choose Us?')?></h4>
+        </div>-->
+        <div class="modal-body">
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('price_promise')->toHtml();?>
+        </div>
+    </div>
+
+  </div>
+</div>
+<div id="whychooseModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <!--<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><?php //echo __('Why Choose Us?')?></h4>
+        </div>-->
+        <div class="modal-body">
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('why_choose_us')->toHtml();?>
+        </div>
+    </div>
+
+  </div>
+</div>
+<div id="volumeModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <!--<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php //echo __('Volume Discount')?></h4>
+      </div>-->
+      <div class="modal-body">
+        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('volume_discount')->toHtml();?>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="freedeliveryModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <!--<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php //echo __('Volume Discount')?></h4>
+      </div>-->
+      <div class="modal-body">
+        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('free_delivery')->toHtml();?>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="cartSuccessModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert alert-success"><?php echo __('')?></div>
+        <div class="cart-success-container">
+            <div class="cart-p-image pull-left">Image</div>
+            <div class="pull-right">
+                <p>Product Name</p>
+                <p>Code</p>
+                <div class="action-btn">
+                    <a href="javascript: void(0)"><?php echo __('Contiue Shopping')?></a>
+                    <a href="javascript: void(0)"><?php echo __('View Basker and Checkout')?></a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

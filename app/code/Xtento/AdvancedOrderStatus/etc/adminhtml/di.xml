@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\History">
+        <plugin name="Xtento_AdvancedOrderStatus::updateStatuses" type="Xtento\AdvancedOrderStatus\Plugin\Block\Sales\Adminhtml\Order\View\HistoryPlugin"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Status\Edit\Form">
+        <plugin name="Xtento_AdvancedOrderStatus::addDropdownToForm" type="Xtento\AdvancedOrderStatus\Plugin\Block\Sales\Adminhtml\Order\Status\Edit\FormPlugin"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Status\NewStatus\Form">
+        <plugin name="Xtento_AdvancedOrderStatus::addDropdownToForm" type="Xtento\AdvancedOrderStatus\Plugin\Block\Sales\Adminhtml\Order\Status\NewStatus\FormPlugin"/>
+    </type>
+    <type name="Magento\Ui\Component\MassAction">
+        <plugin name="Xtento_AdvancedOrderStatus::addMassaction" type="Xtento\AdvancedOrderStatus\Plugin\Ui\Component\MassActionPlugin"/>
+    </type>
+</config>
+<!--
+/**
+ * Product:       Xtento_AdvancedOrderStatus (2.0.8)
+ * ID:            VWr/9REjZDQhBVdZRTowyNozwhIes3xEpdPbOm7d5OI=
+ * Packaged:      2017-06-14T12:06:11+00:00
+ * Last Modified: 2016-04-06T13:15:40+00:00
+ * File:          app/code/Xtento/AdvancedOrderStatus/etc/adminhtml/di.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

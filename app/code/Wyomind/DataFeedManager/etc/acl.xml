@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2015 Wyomind. All rights reserved.
+  See LICENSE.txt for license details.
+ -->
+<!-- acl for simple google shopping. Visible in te acl treeview of user group rights -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Wyomind_DataFeedManager::main" title="Data Feed Manager" sortOrder="10">
+                    <resource id="Wyomind_DataFeedManager::feeds" title="Manage Data Feeds" sortOrder="10" />
+                    <resource id="Wyomind_DataFeedManager::variables" title="Manage Variables" sortOrder="20" />
+                    <resource id="Wyomind_DataFeedManager::functions" title="Manage Functions" sortOrder="30" />
+                    <resource id="Wyomind_DataFeedManager::datafeedmanager_config" title="Manage module configuration" sortOrder="20" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

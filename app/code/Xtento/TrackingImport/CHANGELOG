@@ -1,0 +1,74 @@
+Xtento_TrackingImport
+
+-------------
+  CHANGELOG
+-------------
+
+===== 2.0.0 =====
+ * Initial stable M2 release
+
+===== 2.0.1 =====
+ * Fixed "Change order status" action for orders that still can be invoiced/completed but don't use the "Change status after partial update" action
+
+===== 2.0.2 =====
+ * Fixed a bug where cronjobs of other import profiles where removed when saving a profile
+
+===== 2.0.3 =====
+ * Fixed bug (Registry key "current_shipment" already exists) that could happen when creating multiple shipments at the same time
+ * Fixed shipment email re-sending when another tracking number is added to an existing shipment
+
+===== 2.0.4 =====
+ * Fixed shipment creation logic that sometimes lead to the shipment being created, but the order itself not reflecting "Qty Shipped"
+ * Established compatibility with other email transports such as Ebizmarts/Mandrill for debug message mailing.
+
+===== 2.0.5 =====
+ * Compatibility with Magento 2.1.0 established
+ * Fixed SFTP source type, Net_SFTP library using namespaced class names now
+ * Cronjobs for profiles which have been deleted are automatically deleted as well
+
+===== 2.0.6 =====
+ * SFTP source type is now working for Magento 2.0 and Magento 2.1
+
+===== 2.0.7 =====
+ * Updated composer.json to require XTENTO "XtCore" base module
+
+===== 2.0.8 =====
+ + Added event "xtento_trackingimport_files_load_after" which is called after files have been loaded from sources, so third party developers can retrieve/modify files
+ * Fixed bug when invoicing virtual products
+
+===== 2.0.9 =====
+ + Set grid column type for various columns in "Execution Log" to "longtext" so long result messages are not truncated on the grid
+ + Established compatibility with PHP 7: A class named "Object" (handling filters) has been renamed to "ObjectCondition" as "Object" is a reserved word with PHP 7
+ * Fixed a bug for the "Additional Configuration" popup where &amp; was converted to & automatically upon saving the configuration
+
+===== 2.1.0 =====
+ + Added bin/magento "xtento:trackingimport:import" CLI command
+ * Fixed "Tools > Import" functionality: Sometimes sources assigned to an imported profile were not automatically assigned to the imported profile again.
+
+===== 2.1.1 =====
+ * Fixed issues for manual imports where sometimes (especially in Internet Explorer, but also Chrome/Firefox) the profile drop down didn't work and no manual import was possible.
+
+===== 2.1.2 =====
+ * Fixed issue with profile configuration/profiles failing to load with error "... expects parameter 1 to be string, array"
+
+===== 2.1.3 =====
+ * Fixed error "Fatal error:  Class 'Xtento\TrackingImport\Model\Export\Condition\ObjectCondition' not found"
+
+===== 2.1.4 =====
+ * Fixed issue for credit memo generation, tax amount refunded was wrong, adjusted to Magento core logic
+
+===== 2.1.5 =====
+ * Fixed bug for profiles imported using "Tools > Import" functionality: Cronjob import never started until the profile was saved for the first time; now cronjobs are updated directly after the import via "Tools"
+ * Fixed "Webservice.php.sample" sample source file that was broken
+
+===== 2.1.6 =====
+ + Added "xtento:stockimport:config:export" and "xtento:stockimport:config:import" commands that add "Stock Import > Tools" functionality for the Magento command line via php bin/magento.
+
+===== 2.1.7 =====
+ + Added ability to refund credit memos online - if only one invoice exists for an order, the credit memo will be created against this invoice so an online refund is possible.
+
+===== 2.1.8 =====
+ * Updated Xtento_XtCore to version 2.0.7 ("Added warning in module configuration at System > Configuration if module output is disabled via "Disable Module Output" at System > Configuration > Advanced > Advanced")
+
+===== 2.1.9 =====
+ * Fixed logic which decides if credit memo should be refunded offline or online.

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2015 Wyomind. All rights reserved.
+  See LICENSE.txt for license details.
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <!-- Catalog > Simple Google Shopping -->
+        <add id="Wyomind_DataFeedManager::main" 
+             parent="Magento_Catalog::catalog" 
+             module="Wyomind_DataFeedManager" 
+             title="Data Feed Manager" 
+             sortOrder="100" 
+             resource="Wyomind_DataFeedManager::main" />
+        
+        <add id="Wyomind_DataFeedManager::feeds" 
+             parent="Wyomind_DataFeedManager::main" 
+             module="Wyomind_DataFeedManager" 
+             title="Data Feeds" 
+             sortOrder="100" 
+             resource="Wyomind_DataFeedManager::feeds"
+             action="datafeedmanager/feeds" />
+        
+        <add id="Wyomind_DataFeedManager::functions" 
+             parent="Wyomind_DataFeedManager::main" 
+             module="Wyomind_DataFeedManager" 
+             title="Custom Functions" 
+             sortOrder="102" 
+             resource="Wyomind_DataFeedManager::functions"
+             action="datafeedmanager/functions" />
+        
+        <add id="Wyomind_DataFeedManager::variables" 
+             parent="Wyomind_DataFeedManager::main" 
+             module="Wyomind_DataFeedManager" 
+             title="Custom Variables" 
+             sortOrder="101" 
+             resource="Wyomind_DataFeedManager::variables"
+             action="datafeedmanager/variables" />
+     
+    </menu>
+</config>

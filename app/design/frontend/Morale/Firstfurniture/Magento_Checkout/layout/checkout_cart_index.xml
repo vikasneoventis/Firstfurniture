@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.container">
+            <container name="shiv" htmlTag="div" htmlClass="mobile-container flex" />
+        </referenceContainer>
+        <container name="checkout.cart.complete.order" as="complete_order" label="Complete Order after process to checkout button" htmlTag="div" htmlClass="complete-order-after-button" after="-">
+                <block class="Magento\Cms\Block\Block" name="complete-order-cart">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">complete-order-cart</argument>
+                    </arguments>
+                </block>
+            </container>
+        <move element="cart.summary" destination="shiv" />
+        <move element="checkout.cart.form" destination="shiv" />
+        <move element="cart.discount" destination="cart.summary" after="checkout.cart.shipping"/>
+        <move element="checkout.cart.complete.order" destination="cart.summary" after="-"/>
+    </body>
+</page>

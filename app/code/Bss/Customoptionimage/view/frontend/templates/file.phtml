@@ -1,0 +1,87 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * File options block
+ *
+ * @var $block \Bss\CustomOptionAbsolutePriceQuantity\Block\Options\Type\File
+ */
+?>
+<?php $_option = $block->getOption(); ?>
+<?php $_fileInfo = $block->getFileInfo(); ?>
+<?php $_fileExists = $_fileInfo->hasData(); ?>
+<?php $_fileName = 'options_' . $_option->getId() . '_file'; ?>
+<?php $_fieldNameAction = $_fileName . '_action'; ?>
+<?php $_fieldValueAction = $_fileExists ? 'save_old' : 'save_new'; ?>
+<?php $_fileNamed = $_fileName . '_name'; ?>
+<?php $class = ($_option->getIsRequire()) ? ' required' : ''; ?>
+
+<div class="field file<?php echo $class; ?>" id="bss_options_<?php echo $_option->getId() ?>">
+    <label class="label" for="<?php echo $_fileName; ?>" id="<?php echo $_fileName; ?>-label">
+        <span><?php echo  $block->escapeHtml($_option->getTitle()) ?></span>
+        <?php echo $block->getFormatedPrice() ?>
+        <?php  echo $block->getBssCustomOptionBlock('after_title'); ?>
+    </label>
+    <?php echo $block->getBssCustomOptionBlock('before_control'); ?>
+    <?php if ($_fileExists): ?>
+    <div class="control">
+        <span class="<?php echo $_fileNamed ?>"><?php echo $block->escapeHtml($_fileInfo->getTitle()); ?></span>
+        <a href="javascript:void(0)" class="label" id="change-<?php echo $_fileName ?>" >
+            <?php echo __('Change') ?>
+        </a>
+        <?php if (!$_option->getIsRequire()): ?>
+            <input type="checkbox" id="delete-<?php echo $_fileName ?>" />
+            <span class="label"><?php echo __('Delete') ?></span>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+    <div class="control" id="input-box-<?php echo $_fileName ?>"
+             data-mage-init='{"priceOptionFile":{
+                "fileName":"<?php echo $_fileName ?>",
+                "fileNamed":"<?php echo $_fileNamed ?>",
+                "fieldNameAction":"<?php echo $_fieldNameAction ?>",
+                "changeFileSelector":"#change-<?php echo $_fileName ?>",
+                "deleteFileSelector":"#delete-<?php echo $_fileName ?>"}
+             }'
+            <?php echo $_fileExists ? 'style="display:none"' : '' ?>>
+        <input type="file"
+               name="<?php echo $_fileName; ?>"
+               id="<?php echo $_fileName; ?>"
+               class="product-custom-option<?php echo $_option->getIsRequire() ? ' required' : '' ?>"
+               <?php echo $_fileExists ? 'disabled="disabled"' : '' ?> />
+        <input type="hidden" name="<?php echo $_fieldNameAction; ?>" value="<?php echo $_fieldValueAction; ?>" />
+        <?php if ($_option->getFileExtension()): ?>
+            <p class="note">
+                <?php echo __('Compatible file extensions to upload')?>: <strong><?php echo $_option->getFileExtension() ?></strong>
+            </p>
+        <?php endif; ?>
+        <?php if ($_option->getImageSizeX() > 0): ?>
+            <p class="note">
+                <?php echo __('Maximum image width')?>: <strong><?php echo $_option->getImageSizeX() ?> <?php echo __('px.')?></strong>
+            </p>
+        <?php endif; ?>
+        <?php if ($_option->getImageSizeY() > 0): ?>
+            <p class="note">
+                <?php echo __('Maximum image height')?>: <strong><?php echo $_option->getImageSizeY() ?> <?php echo __('px.')?></strong>
+            </p>
+        <?php endif; ?>
+    </div>
+    <?php  echo $block->getBssCustomOptionBlock('after_control'); ?>
+</div>

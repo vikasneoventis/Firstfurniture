@@ -1,0 +1,40 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+ -->
+<span data-bind="click: del, attr: { id: bss_span}, css: {'bss-checkbox-null': value() == '', 'bss-checkbox-del': value() != '' }">
+	<img data-bind="attr: {src: value, id: bss_preview}" width="32px" height="32px" />
+</span>
+<div class="admin__field admin__field-option" style="display: none">
+	<input type="checkbox" class="admin__control-checkbox" data-bind="checked: checked,
+	    attr: { id: uid, disabled: disabled, name: inputName }, hasFocus: focused">
+	<label class="admin__field-label" data-bind="text: description || label, attr: { for: uid }">
+	</label>
+	<!-- ko if: notice -->
+	<div class="admin__field-note" data-bind="attr: {id: noticeId}"><span data-bind="text: notice"></span></div>
+	<!-- /ko -->
+</div>

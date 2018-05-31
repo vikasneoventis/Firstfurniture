@@ -1,0 +1,13 @@
+User-agent: Googlebot
+Disallow:
+ 
+User-agent: AdsBot-Google
+Disallow:
+ 
+User-agent: Googlebot-Image
+Disallow:
+
+Sitemap: https://www.firstfurniture.co.uk/sitemap/ffsitemap.xml
+Sitemap: https://www.firstfurniture.co.uk/sitemap/newsitemap.xml
+Sitemap: https://www.firstfurniture.co.uk/firstfurniture.co.uk/html/sitemap/ffsitemap.xml
+Sitemap: https://www.firstfurniture.co.uk/firstfurniture.co.uk/html/sitemap/newsitemap.xml

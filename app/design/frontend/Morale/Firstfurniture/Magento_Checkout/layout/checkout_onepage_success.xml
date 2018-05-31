@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Success Page</title>
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Text" name="exampleScript">
+                <arguments>
+                    <argument name="text" xsi:type="string"><![CDATA[<img src="//drs2.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=811818e7-45bf-4db7-a40e-c1077dfbdddd" width="1" height="1"/>]]></argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

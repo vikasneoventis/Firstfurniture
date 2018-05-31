@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="attributes_tabs">
+            <!-- toHtml is in  @see Amasty\Preorder\Plugin\ProductMassEditTabInventory -->
+            <block class="Amasty\Preorder\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Inventory\PreOrder" name="amasty_pre_order"/>
+        </referenceBlock>
+    </body>
+</page>

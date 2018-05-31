@@ -1,0 +1,121 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Template for displaying product price at product view page, gift registry and wish-list
+ *
+ * @var $block \Magento\Catalog\Pricing\Render\PriceBox
+ */
+?>
+<?php
+
+/** @var Magento\Msrp\Pricing\Price\MsrpPriceInterface $priceType */
+$priceType = $block->getPrice();
+
+/** @var $product \Magento\Catalog\Model\Product */
+$product = $block->getSaleableItem();
+$productId = $product->getId();
+
+$msrpPrice = $block->renderAmount(
+    $priceType->getCustomAmount($product->getMsrp() ?: $product->getTypeInstance()->getChildrenMsrp($product)),
+    [
+        'price_id' => $block->getPriceId() ? $block->getPriceId() : 'old-price-' . $productId,
+        'include_container' => false,
+        'skip_adjustments' => true
+    ]
+);
+//$productPrice = $block->renderAmount($product->getPriceInfo()->getPrice('final_price')->getValue(), [
+//        'price_id'          => $block->getPriceId(),
+//        //'price_type'        => 'finalPrice',
+//        'include_container' => true,
+//        'skip_adjustments' => true
+//        
+//]);
+$priceElementIdPrefix = $block->getPriceElementIdPrefix() ? $block->getPriceElementIdPrefix() : 'product-price-';
+
+$addToCartUrl = '';
+if ($product->isSaleable()) {
+    /** @var Magento\Catalog\Block\Product\AbstractProduct $addToCartUrlGenerator */
+    $addToCartUrlGenerator = $block->getLayout()->getBlockSingleton('Magento\Catalog\Block\Product\AbstractProduct');
+    $addToCartUrl = $addToCartUrlGenerator->getAddToCartUrl(
+        $product,
+        ['_query' => [
+            \Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED =>
+                $this->helper('Magento\Framework\Url\Helper\Data')->getEncodedUrl(
+                    $addToCartUrlGenerator->getAddToCartUrl($product)
+                ),
+        ]]
+    );
+}
+?>
+<?php if ($product->getMsrp()): ?>
+    <span class="old-price map-old-price"><span class="price-was"><?php echo __('Was')?> </span><?php /* @escapeNotVerified */ echo $msrpPrice ?></span>
+    <span class="price map-price">
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of Object Manager
+        $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+        $value =  $product->getPriceInfo()->getPrice('final_price')->getValue(); // or whatever value you have in your template
+        $formattedCurrencyValue = $priceHelper->currency($value, true, false);
+        
+        $currencysymbol = $objectManager->get('Magento\Directory\Model\Currency');
+        
+        //$currency = $_objectManager->create('Magento\Directory\Model\CurrencyFactory')->create()->load($currency);
+        //$currencySymbol = $currencysymbol->getStore()->getCurrencySymbol();
+        //echo $currencySymbol;die;
+        ?>
+        <span class="price-now"><?php echo __('Now')?> </span><span id="final-price-span" data-price="<?php echo $value?>" data-actual-price="<?php echo $value?>" data-currency="<?php echo $currencysymbol->getCurrencySymbol();?>"><?php echo  $formattedCurrencyValue;?> </span>
+    </span>
+    
+    <?php $_savingPercent = 100 - round(($value / $product->getMsrp())*100); ?>
+    <p class="special-price yoursaving">
+        <span class="label"><?php echo __('You Save:') ?></span>
+        <span class="price">
+            <?php $yousave = $product->getMsrp() - $value;?>
+            <?php  echo $priceHelper->currency($yousave, true, false)."(".$_savingPercent; ?>%)
+        </span>
+    </p>
+    <span class="product-label first-label">&nbsp;&nbsp;-<?php echo $_savingPercent."% ".__('OFF')?></span>
+<?php endif; ?>
+
+<?php if ($priceType->isShowPriceOnGesture()): ?>
+    <?php
+        $priceElementId = $priceElementIdPrefix . $productId . $block->getIdSuffix();
+        $popupId = 'msrp-popup-' . $productId . $block->getRandomString(20);
+        $data = ['addToCart' => [
+            'origin'=> 'msrp',
+            'popupId' => '#' . $popupId,
+            'productName' => $product->getName(),
+            'productId' => $productId,
+            'productIdInput' => 'input[type="hidden"][name="product"]',
+            'realPrice' => $block->getRealPriceHtml(),
+            'isSaleable' => $product->isSaleable(),
+            'msrpPrice' => $msrpPrice,
+            'priceElementId' => $priceElementId,
+            'closeButtonId' => '#map-popup-close',
+            'addToCartUrl' => $addToCartUrl,
+            'paymentButtons' => '[data-label=or]'
+        ]];
+        if ($block->getRequest()->getFullActionName() === 'catalog_product_view') {
+            $data['addToCart']['addToCartButton'] = '#product_addtocart_form [type=submit]';
+        } else {
+            $data['addToCart']['addToCartButton'] = sprintf(
+                'form:has(input[type="hidden"][name="product"][value="%s"]) button[type="submit"]',
+                (int) $productId
+            );
+        }
+    ?>
+    <span id="<?php /* @escapeNotVerified */ echo $block->getPriceId() ? $block->getPriceId() : $priceElementId ?>" style="display:none"></span>
+<?php else: ?>
+    <span class="msrp-message">
+     <?php /* @escapeNotVerified */ echo $priceType->getMsrpPriceMessage() ?>
+    </span>
+<?php endif; ?>
+
+<?php if ($block->getZone() == \Magento\Framework\Pricing\Render::ZONE_ITEM_VIEW): ?>
+    <?php $helpLinkId = 'msrp-help-' . $productId . $block->getRandomString(20); ?>
+<?php endif; ?>

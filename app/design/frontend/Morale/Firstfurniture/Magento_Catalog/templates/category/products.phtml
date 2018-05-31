@@ -1,0 +1,87 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+
+?>
+
+<?php /*if($category->getId() == 4782):?>
+    <?php $subcats = $category->getChildrenCategories();?>
+    <?php foreach ($subcats as $subcat):?>
+        <?php $subcats1 = $subcat->getChildrenCategories();?>
+        <?php foreach ($subcats1 as $subcat1):?>
+            <?php //echo $subcat1->getId();die;?>
+            <?php $_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat1->getId());?>
+            <?php $_category->setStoreId(2);?>
+            <?php $_category->setIsAnchor(0);?>
+            <?php $_category->setPageLayout('1column');?>
+            <?php $_category->setIsTopCategory(0);?>
+            
+            <?php 
+            try {
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($_category);
+                $_category->save(); 
+            }catch(\Exception $e){
+                //echo "<pre>"; ($e);die;
+                echo "error";die;
+            }
+            ?>
+        <?php endforeach;?>
+    <?php endforeach;?>
+<?php endif;*/?>
+
+<?php if(($category->getLevel() < 4 && $category->getPageLayout() == '1column' && $category->getIsAnchor() == 0 ) || $category->getId() == 4782):?>
+<ul class="sub-category-list <?php echo str_replace(" ","-", strtolower(trim($category->getName())))?>">
+    <?php $subcats = $category->getChildrenCategories();?>
+    <?php foreach ($subcats as $subcat):?>
+        <?php if ($subcat->getIsActive()):?>
+        <li class="sub-cat <?php echo str_replace(" ","-", strtolower(trim($subcat->getName())))?>">
+            <?php
+            
+            $_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+            $subcaturl = $subcat->getUrl();
+            $_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+            $catImageUrl = $_category->getImageUrl();
+            ?>
+            <?php if($category->getId() == 4782):?>
+                <?php
+                $_imgHtml = '<img src="' . $catImageUrl . '" />';
+                $_imgHtml = $_outputhelper->categoryAttribute($_category, $_imgHtml, 'image');
+                ?>
+                <a href="<?php echo $subcaturl; ?>" class="sub-cat-img"> <?php echo $_imgHtml?> </a>
+            <?php else:?>
+                <a href="<?php echo $subcaturl; ?>" class="sub-cat-img" style="background-image: url(<?php echo $catImageUrl?>)"></a>
+            <?php endif;?>
+            <a href="<?php echo $subcaturl; ?>" title="<?php echo $subcat->getName()?>" class="sub-cat-title"><span><?php echo $subcat->getName()?></span></a>
+        </li>
+        <?php endif;?>
+    <?php endforeach;?>
+<?php elseif($category->getIsAnchor() == 0):?>
+    <?php if (!$block->isContentMode() || $block->isMixedMode()): ?>
+     <div class="five-product-row">
+        <?php echo $block->getProductListHtml() ?>
+    <?php endif; ?>
+    </div>
+<?php else:?>
+    <?php if (!$block->isContentMode() || $block->isMixedMode()): ?>
+    <div class="three-product-row">
+        <?php echo $block->getProductListHtml() ?>
+    </div>
+    <?php endif; ?>
+<?php endif;?>

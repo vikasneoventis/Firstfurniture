@@ -1,0 +1,140 @@
+<?php
+    $style = $block->getStyle();
+    $toDate = strtotime($block->getScopeConfig('timecountdown/general/todate'));
+    $isShowHomePage = $block->getScopeConfig('timecountdown/general/show_in_homepage');
+    $isDisplayInOne = $block->getScopeConfig('timecountdown/general/display_in_one');
+    
+    ?>
+    <?php if($isShowHomePage):?>
+    <div class="timer-container">
+        <div class="mb-timecountdown-container timer-homepage-one timer-<?php echo $style; ?> "
+             data-todate="<?php echo $toDate; ?>">
+                <div class="timer-countbox"></div>
+        </div>
+    </div>
+    <?php endif;?>
+    <!--<div class="container">
+        <div class="mb-timecountdown-container timer-homepage-one timer-<?php //echo $style; ?> " data-todate="<?php //echo $toDate; ?>">
+           <div class="timer-countbox is-countdown">
+               <span class="countdown-row countdown-show4">
+                   <span class="countdown-section">
+                       <span class="countdown-amount">30</span>
+                       <span class="countdown-period">Days</span>
+                   </span>
+                   <span class="countdown-section">
+                       <span class="countdown-amount">13</span>
+                       <span class="countdown-period">Hours</span>
+                   </span>
+                   <span class="countdown-section">
+                       <span class="countdown-amount">51</span>
+                       <span class="countdown-period">Minutes</span>
+                   </span>
+                   <span class="countdown-section">
+                       <span class="countdown-amount">1</span>
+                       <span class="countdown-period">Second</span>
+                   </span>
+               </span>
+           </div>
+        </div>
+    </div>-->
+<?php
+
+?>
+
+<?php    
+//$productCollection = $block->getProductCollection();
+
+/*if (count($productCollection) > 0) {
+    $isDisplayInOne = $block->getScopeConfig('timecountdown/general/display_in_one');
+    ?>
+    <script type="text/javascript">
+        require(['jquery', 'magebuzz/owlcarousel'], function ($) {
+            $(document).ready(function () {
+                $("#mb-timecountdown-carousel").owlCarousel({
+                    autoPlay: 5000, //Set AutoPlay to 3 seconds
+                    items: 5,
+                    itemsDesktop: [1199, 3],
+                    itemsDesktopSmall: [979, 3]
+                });
+            });
+        });
+    </script>
+    <div class="magebuzz-timecountdown-slider">
+        <?php
+        if ($isDisplayInOne && $block->isPriceCountdownInOne())
+        {
+            $style = $block->getStyle();
+            $toDate = strtotime($block->getScopeConfig('timecountdown/general/todate'));
+            ?>
+            <div class="mb-timecountdown-container timer-homepage-one timer-<?php echo $style; ?> "
+                 data-todate="<?php echo $toDate; ?>">
+                <div class="timer-heading"><?php echo __('PRICE COUNTDOWN'); ?></div>
+                <div class="timer-countbox"></div>
+            </div>
+        <?php } ?>
+        <div id="mb-timecountdown-carousel">
+            <?php
+            $_helper = $this->helper('Magento\Catalog\Helper\Output');
+            foreach ($productCollection as $item) {
+                $product = $item->load($item->getId());
+                if ($block->isPriceCountdownHomepage($product)) {
+                    $image = 'category_page_grid';
+                    ?>
+                    <ol class="products lists items product-items">
+                        <li class="item product product-item">
+                            <div class="product-item-info" data-container="product-grid" style="min-width:200px;">
+                                <?php
+                                $productImage = $block->getImage($product, $image);
+                                ?>
+                                <?php // Product Image  ?>
+                                <a href="<?php echo $product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
+                                    <?php echo $productImage->toHtml(); ?>
+                                </a>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name">
+                                        <a class="product-item-link"
+                                           href="<?php echo $product->getProductUrl() ?>">
+                                               <?php echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+                                        </a>
+                                    </strong>
+                                    <?php echo $block->getProductPrice($product); ?>
+                                    <div class="actions-primary">
+                                        <?php if ($product->isSaleable()) { ?>
+                                            <?php if ($product->getTypeInstance()->hasRequiredOptions($product)) { ?>
+                                                <button class="action tocart primary"
+                                                        data-mage-init='{"redirectUrl":{"url":"<?php echo $block->getAddToCartUrl($product) ?>"}}'
+                                                        type="button" title="<?php echo __('Add to Cart') ?>">
+                                                    <span><?php echo __('Add to Cart') ?></span>
+                                                </button>
+                                            <?php } else { ?>
+                                                <?php
+                                                $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($product), ['product' => $product->getId()]);
+                                                ?>
+                                                <button class="action tocart primary"
+                                                        data-post='<?php echo $postData; ?>'
+                                                        type="button" title="<?php echo __('Add to Cart') ?>">
+                                                    <span><?php echo __('Add to Cart') ?></span>
+                                                </button>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <?php if ($product->getIsSalable()) { ?>
+                                                <div class="stock available"><span><?php echo __('In stock') ?></span></div>
+                                            <?php } else { ?>
+                                                <div class="stock unavailable"><span><?php echo __('Out of stock') ?></span></div>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+<?php }*/ ?>

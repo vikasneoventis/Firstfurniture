@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales">
+                    <resource id="Magento_Sales::sales_operation">
+                        <resource id="Magento_Sales::sales_order">
+                            <resource id="Xtento_AdvancedOrderStatus::actions" title="Advanced Order Status Actions" sortOrder="100">
+                                <resource id="Xtento_AdvancedOrderStatus::changestatus" title="Change Status" sortOrder="70"/>
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::system">
+                    <resource id="Xtento_XtCore::extensions">
+                        <resource id="Xtento_AdvancedOrderStatus::configuration" title="Advanced Order Status" sortOrder="30"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
+<!--
+/**
+ * Product:       Xtento_AdvancedOrderStatus (2.0.8)
+ * ID:            VWr/9REjZDQhBVdZRTowyNozwhIes3xEpdPbOm7d5OI=
+ * Packaged:      2017-06-14T12:06:11+00:00
+ * Last Modified: 2016-05-30T14:46:04+00:00
+ * File:          app/code/Xtento/AdvancedOrderStatus/etc/acl.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

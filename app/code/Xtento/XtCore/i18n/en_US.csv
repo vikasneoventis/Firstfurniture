@@ -1,0 +1,26 @@
+Custom,Custom
+"PHP ZIP extension not found. Please download files manually from the server, or install the ZIP extension, or export just one file with each profile.","PHP ZIP extension not found. Please download files manually from the server, or install the ZIP extension, or export just one file with each profile."
+"Could not generate temporary file in tmp folder to store ZIP file. Please contact your hoster and make sure the PHP ""tmp"" (tempnam(sys_get_temp_dir())) directory is writable. ZIP creation failed.","Could not generate temporary file in tmp folder to store ZIP file. Please contact your hoster and make sure the PHP ""tmp"" (tempnam(sys_get_temp_dir())) directory is writable. ZIP creation failed."
+"Could not open file ' . . '. ZIP creation failed.","Could not open file ' . . '. ZIP creation failed."
+"ZIP file couldn't be created.","ZIP file couldn't be created."
+"We can't save the module configuration: %1","We can't save the module configuration: %1"
+"The extension couldn't be enabled. Please make sure you are using a valid license key.","The extension couldn't be enabled. Please make sure you are using a valid license key."
+"Updates for installed extensions","Updates for installed extensions"
+"New Extensions","New Extensions"
+Discounts/Promotions,Discounts/Promotions
+"Other information","Other information"
+"Custom Carrier","Custom Carrier"
+"<img src=""//www.xtento.com/media/images/extension_logo.png"" alt=""XTENTO"" height=""20"" style=""vertical-align:top; margin-left:-1px;""/> XTENTO Extensions","<img src=""//www.xtento.com/media/images/extension_logo.png"" alt=""XTENTO"" height=""20"" style=""vertical-align:top; margin-left:-1px;""/> XTENTO Extensions"
+"General Configuration","General Configuration"
+"Extensions and Notifications","Extensions and Notifications"
+"Notifications enabled","Notifications enabled"
+"I'd like to receive updates about","I'd like to receive updates about"
+"Hold down the CTRL key to select multiple notifications.","Hold down the CTRL key to select multiple notifications."
+"Compatibility Mode & Fixes","Compatibility Mode & Fixes"
+"
+                    <strong>Only change the below settings if instructed by a XTENTO representative.</strong> These are fixes/patches that can be enabled, which are required only in SOME Magento environments.
+                ","
+                    <strong>Only change the below settings if instructed by a XTENTO representative.</strong> These are fixes/patches that can be enabled, which are required only in SOME Magento environments.
+                "
+"Debug Information","Debug Information"
+"XTENTO Extension Store","XTENTO Extension Store"

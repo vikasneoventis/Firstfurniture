@@ -1,0 +1,96 @@
+<?php $categories = $block->getCategories();?>
+  <nav class="navbar navbar-default" data-spy="affix" data-offset-top="168">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <?php $brandsCategoryIds = [4782, 6686];?>
+    <?php $arrAllowDropDownCat = [6686];?>
+    
+    <div class="collapse navbar-collapse js-navbar-collapse">
+      <div class="page-main">
+        <ul class="nav navbar-nav">
+            <li class="small-logo">
+              <a href="" class="small-logo-linnk">
+                <img src="<?php echo $this->getViewFileUrl('Shiv_CategoryMegaMenu::images/small_logo.png'); ?>" alt="<?php echo __('First Furniture')?>" />
+              </a>
+            </li>
+        <?php foreach ( $categories as $category ) :?>
+        <?php $secondLevelCategories = $block->getCategories($category->getId());?>
+        <?php $countSubCat = 1;?>
+        <?php if($countSubCat):?>
+          <?php $mainCategoryUrl = $block->getCategoryUrl($category);?>
+          <?php $mainCategoryTitle = $category->getName();?>
+        <?php endif;?>
+            <?php if(!in_array($category->getId(), $brandsCategoryIds)):?>
+                <?php if(count($secondLevelCategories)>0):?>
+                <li class="dropdown mega-dropdown">
+                  <a href="<?php echo $block->getCategoryUrl($category); ?>" title="<?php echo $category->getName(); ?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $category->getName(); ?> <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                  <ul class="dropdown-menu mega-dropdown-menu row">
+                    <li class="abs-view-all">
+                      <a href="<?php echo $mainCategoryUrl; ?>" title="<?php echo $mainCategoryTitle; ?>"><?php echo __('View All')?> <?php echo $mainCategoryTitle; ?></a>
+                    </li>
+                    <?php foreach ( $secondLevelCategories as $slCategory ) :?>
+                        <?php //if($slCategory->hasChildren()):?>
+                            <?php if(($countSubCat>1 && $countSubCat==4)):?>
+                                <?php $displayedCategoryImage = true;?>
+                                <li class="col-sm-4 pull-right">
+                                    <a href="<?php echo $block->getCategoryUrl($category); ?>" title="<?php echo $category->getName() ?>">
+                                        <img src="<?php echo $block->getCategoryImage($category)?>" class="img-responsive" alt="<?php echo $category->getName() ?>">
+                                    </a>
+                                </li>
+                            <?php endif;?>
+                            <li class="col-sm-2">
+                              <ul>
+                                <li>
+                                    <a href="<?php echo $block->getCategoryUrl($slCategory)?>" title="<?php echo $slCategory->getName()?>">
+                                        <span class="dropdown-header"><?php echo $slCategory->getName()?></span>
+                                    </a>
+                                  <?php echo $block->getChildCategoryView($slCategory)?>
+                                </li>
+                              </ul>
+                            </li>
+                        <?php $countSubCat++;?>
+                      <?php //endif;?>
+                    <?php endforeach;?>
+                    <?php if(!isset($displayedCategoryImage) || $countSubCat == 4):?>
+                        <?php $displayedCategoryImage = true;?>
+                        <li class="col-sm-4 pull-right">
+                            <a href="<?php echo $block->getCategoryUrl($category); ?>" title="<?php echo $category->getName() ?>">
+                                <img src="<?php echo $block->getCategoryImage($category)?>" class="img-responsive" alt="<?php echo $category->getName() ?>">
+                            </a>
+                        </li>
+                    <?php endif;?>
+                  </ul>
+                </li>
+                <?php else:?>
+                <li class="">
+                    <a href="<?php echo $block->getCategoryUrl($category); ?>" title="<?php echo $category->getName(); ?>" class="no-dropdown"><?php echo $category->getName(); ?></a>
+                </li>
+                <?php endif;?>
+              <?php $countSubCat++;?>
+            <?php else:?>
+              <li class="dropdown mega-dropdown">
+                  <a href="<?php echo $block->getCategoryUrl($category); ?>" title="<?php echo $category->getName(); ?>" class="dropdown-toggle"><?php echo $category->getName(); ?></a>
+              </li>
+              
+            <?php endif;?>
+        <?php endforeach;?>
+        </ul>
+        
+      </div>
+    </div>
+    <!-- /.nav-collapse -->
+  </nav>
+</div>
+<script type="text/javascript">
+    requirejs(['jquery'], function () {
+        jQuery(document).on('click', '.mega-dropdown', function(e) {
+          e.stopPropagation()
+        })
+    });
+</script>

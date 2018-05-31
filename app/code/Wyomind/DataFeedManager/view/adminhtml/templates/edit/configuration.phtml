@@ -1,0 +1,97 @@
+<script>
+
+
+    require(["jquery", "dfm_configuration"], function ($, configuration) {
+        'use strict';
+
+        function waitFor(elt, callback) {
+            var initializer = null;
+            initializer = setInterval(function () {
+                if ($(elt).length > 0) {
+                    callback();
+                    clearInterval(initializer);
+                }
+            }, 200);
+        }
+
+        waitFor('#product_pattern', function () {
+
+            /* ========= Config ========================= */
+
+            /* template editor */
+            configuration.codeMirrorProductPattern = CodeMirror.fromTextArea(document.getElementById('product_pattern'), {
+                matchBrackets: true,
+                mode: "application/x-httpd-php",
+                indentUnit: 2,
+                indentWithTabs: false,
+                lineWrapping: true,
+                lineNumbers: true,
+                styleActiveLine: true
+            });
+
+
+            configuration.codeMirrorHeaderPattern = CodeMirror.fromTextArea(document.getElementById('header'), {
+                matchBrackets: true,
+                mode: "application/x-httpd-php",
+                indentUnit: 2,
+                indentWithTabs: false,
+                lineWrapping: true,
+                lineNumbers: true,
+                styleActiveLine: true
+            });
+            configuration.codeMirrorFooterPattern = CodeMirror.fromTextArea(document.getElementById('footer'), {
+                matchBrackets: true,
+                mode: "application/x-httpd-php",
+                indentUnit: 2,
+                indentWithTabs: false,
+                lineWrapping: true,
+                lineNumbers: true,
+                styleActiveLine: true
+            });
+
+
+            // to be sure that the good value will be well stored in db
+            configuration.codeMirrorProductPattern.on('blur', function () {
+                $('#product_pattern').val(configuration.codeMirrorProductPattern.getValue());
+            });
+            configuration.codeMirrorHeaderPattern.on('blur', function () {
+                $('#header').val(configuration.codeMirrorHeaderPattern.getValue());
+            });
+            configuration.codeMirrorFooterPattern.on('blur', function () {
+                $('#footer').val(configuration.codeMirrorFooterPattern.getValue());
+            });
+            
+            
+
+            $('#type').on('change', function () {
+                configuration.updateType(true);
+            });
+            
+                       
+            configuration.current_type = configuration.getType();
+            configuration.current_value = $('#type').val();
+            configuration.updateType(false);    
+
+            $(document).on('focus', ".body-txt-field   ", function () {
+                configuration.popup_open($(this).val(), this);
+            });
+
+            $(document).on('focus', ".header-txt-field", function () {
+                configuration.popup_open($(this).val(), this);
+            });
+
+
+            $(document).on('click', ".remove-field", function() {
+                configuration.removeField(this);
+            });
+
+            /* ========= Preview + Library ================== */
+
+            configuration.codeMirrorHeaderPattern.refresh();
+            configuration.codeMirrorProductPattern.refresh();
+            configuration.codeMirrorFooterPattern.refresh();
+            
+
+        });
+    });
+</script>

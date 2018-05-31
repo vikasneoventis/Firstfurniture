@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="shiv_categoryslider" class="Shiv\ProductAttribute\Block\ProductAttributeOption" is_email_compatible="true">
+        <label translate="true">Shop By Meterial</label>
+        <description translate="true">Shop By Meterial</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="id_name" xsi:type="text" required="true" visible="true">
+                <label translate="true">Unique Id</label>
+                <description translate="true">Unique id for slider or listing.</description>
+            </parameter>
+            <parameter name="is_slider" xsi:type="select" required="true" visible="true">
+                <label translate="true">Listing Type</label>
+                <options>
+                    <option name="with_slider" value="slider" selected="true">
+                        <label translate="true">Slider</label>
+                    </option>
+                    <option name="with_out_slider" value="no_slider">
+                        <label translate="true">Normal Listing</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="filter_template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="product/widget/attribute/meterial_option.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="cache_lifetime" xsi:type="text" visible="true">
+                <label translate="true">Cache Lifetime (Seconds)</label>
+                <description translate="true">86400 by default, if not set. To refresh instantly, clear the Blocks HTML Output cache.</description>
+            </parameter>
+        </parameters>
+        
+    </widget>
+</widgets>

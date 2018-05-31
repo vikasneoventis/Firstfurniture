@@ -1,0 +1,37 @@
+<?php $_product = $block->getProduct()?>
+<?php 
+$categoryIds = $_product->getCategoryIds();
+ 
+$categories = $block->getCategoryCollection()
+                    ->addAttributeToFilter('entity_id', $categoryIds);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+foreach ($categories as $category) {
+    $catIdArr = explode('/',$category->getPath());
+    
+    if( in_array('63',$catIdArr) )
+    {
+        //$subcat = Mage::getModel('catalog/category')->load($subcat->getId());
+        //$img = Mage::getBaseUrl('media').'catalog/category/' . $subcat->getThumbnail();
+        //$url = $subcat->getUrl();
+        //$name = $subcat->getName();
+        //break;
+        $_category = $objectManager->create('Magento\Catalog\Model\Category')->load($category->getId());
+        $_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+        
+        if ($_imgUrl = $_category->getImageUrl())
+        {
+            
+            $_imgHtml = '<img src="' . $_imgUrl . '" />';
+            $_imgHtml = $_outputhelper->categoryAttribute($_category, $_imgHtml, 'image');
+
+            /* @escapeNotVerified */
+            echo '<div>
+                    <a href="' . $category->getUrl() . '" class="block-promo" title="' . $category->getName() . '">' . $_imgHtml . '</a>
+                </div>';
+            break;
+        }
+    }
+}
+
+?>

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="bss" translate="label" sortOrder="300">
+            <label><![CDATA[Bss Commerce]]></label>
+        </tab>
+        <section id="Bss_Commerce" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Custom Option Image</label>
+            <tab>bss</tab>
+            <resource>Bss_Customoptionimage::config</resource>
+            <group id="Customoptionimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="Enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Version 1.0.5]]></comment>
+                </field>
+            </group>
+            <group id="frontend_view" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Frontend View</label>
+                <field id="Dropdown" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                        <label>Drop-down Option View</label>
+                        <source_model>Bss\Customoptionimage\Model\Config\Source\View</source_model>
+                </field>
+                <field id="Multiple" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                        <label>Multiple Select Option View</label>
+                        <source_model>Bss\Customoptionimage\Model\Config\Source\View</source_model>
+                </field>
+            </group> 
+            <group id="image_size" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Image Size Settings</label>
+                <field id="Dropdown_y" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Drop-down Option Image Height</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Dropdown_x" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Drop-down Option Image Width</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Radio_y" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Radio Buttons Option Image Height</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Radio_x" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Radio Buttons Option Image Width</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Checkbox_y" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Checkbox Option Image Height</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Checkbox_x" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Checkbox Option Image Width</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Multiple_y" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Multiple Select Option Image Height</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="Multiple_x" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Multiple Select Option Image Width</label>
+                    <validate>validate-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

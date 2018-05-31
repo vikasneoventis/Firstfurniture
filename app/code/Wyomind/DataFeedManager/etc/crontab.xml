@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2015 Wyomind. All rights reserved.
+  See LICENSE.txt for license details.
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Cron/etc/crontab.xsd">
+    <group id="default">
+        <job name="datafeedmanager_generate" instance="Wyomind\DataFeedManager\Model\Observer" method="checkToGenerate">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+    </group>
+</config>

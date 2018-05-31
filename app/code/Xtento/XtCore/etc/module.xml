@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Xtento_XtCore" setup_version="2.0.7">
+        <sequence>
+            <module name="Magento_AdminNotification"/>
+        </sequence>
+    </module>
+</config>
+<!--
+/**
+ * Product:       Xtento_XtCore (2.0.7)
+ * ID:            4wmf19Yp9HCIHo7KOs8fxcH61vi7Ff3lLVajZHUke48=
+ * Packaged:      2017-06-14T12:47:31+00:00
+ * Last Modified: 2017-05-12T12:51:13+00:00
+ * File:          app/code/Xtento/XtCore/etc/module.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

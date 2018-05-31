@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+?>
+<?php
+/**
+ * @var $block \Amasty\Preorder\Block\Adminhtml\Product\Edit\Tab\Inventory\PreOrderJs
+ */
+?>
+<script type="text/javascript">
+    require([
+            'jquery'
+        ],
+        function($) {
+            var preorderId = <?=$block->getPreorderId();?>;
+            var $preorderTab = $("#amasty_preorder_fieldset");
+            if($("#inventory_backorders").val() != preorderId){
+                $preorderTab.hide();
+            }
+            $("#inventory_backorders").change(function(){
+                if(this.value == preorderId) {
+                    $preorderTab.show();
+                } else {
+                    $preorderTab.hide();
+                }
+            });
+        }
+    );
+</script>

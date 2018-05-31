@@ -1,0 +1,108 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+?> 
+
+<?php
+$productId = $block->getProduct()->getId();
+$option = $block->getOption();
+$moduleConfig = $block->getConfigHelper();
+$dropdownViewType = $moduleConfig->getDropdownView();
+$multipleViewType = $moduleConfig->getMultipleSelectView();
+?>
+    <?php if ($moduleConfig->isModuleEnable()) : ?>
+        <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DROP_DOWN) : ?>
+            <?php if ($dropdownViewType == 0) : ?>
+                <div class="Bss_image_preview" id="Bss_image_preview_<?php echo $option->getId() ?>">
+                    <img alt="" id="image_preview_<?php echo $option->getId() ?>"/>
+                </div>
+            <?php elseif ($dropdownViewType == 1) : ?>
+                <div class="Bss_image_preview" id="Bss_image_preview_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url') ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#bss_options_<?php echo $option->getId() ?>": {
+                        "bss_preview_dropdown": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $dropdownViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php elseif ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_MULTIPLE) :?>
+            <?php if ($multipleViewType == 0) : ?>
+                <div class="Bss_image_multiselect" id="Bss_image_multiselect_<?php echo $option->getId() ?>">
+                </div>
+            <?php elseif ($multipleViewType == 1) : ?>
+                <div class="Bss_image_multiselect" id="Bss_image_multiselect_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url'); ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#bss_options_<?php echo $option->getId() ?>": {
+                        "bss_preview_multiple": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $multipleViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php else : ?>            
+            <script type="text/x-magento-init">
+                {
+                    "#bss_options_<?php echo $option->getId() ?>": {
+                        "bss_preview_static_select": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php endif; ?>
+    <?php endif;?> 

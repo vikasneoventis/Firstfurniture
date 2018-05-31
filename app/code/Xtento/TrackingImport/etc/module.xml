@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Xtento_TrackingImport" setup_version="2.1.9">
+        <sequence>
+            <module name="Magento_Backend"/>
+            <module name="Xtento_XtCore"/>
+        </sequence>
+    </module>
+</config>
+<!--
+/**
+ * Product:       Xtento_TrackingImport (2.1.9)
+ * ID:            4wmf19Yp9HCIHo7KOs8fxcH61vi7Ff3lLVajZHUke48=
+ * Packaged:      2017-06-14T12:47:31+00:00
+ * Last Modified: 2017-05-24T13:02:01+00:00
+ * File:          app/code/Xtento/TrackingImport/etc/module.xml
+ * Copyright:     Copyright (c) 2017 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

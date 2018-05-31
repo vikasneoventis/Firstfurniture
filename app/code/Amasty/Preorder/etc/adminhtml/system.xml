@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ampreorder" translate="label" type="text" sortOrder="161809" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_Preorder::config</resource>
+            <class>separator-top</class>
+            <label>Pre Order</label>
+            <tab>amasty</tab>
+            <group id="functional" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Functional Options</label>
+                <field id="enabled" translate="label comment tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Pre Orders</label>
+                    <comment>Affects new orders with products set to be pre-ordered.</comment>
+                    <tooltip>Please note! Products on "Pre Order" must be set to "In Stock"</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allowemptyqty" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Pre Orders For Products With Zero Quantity</label>
+                    <comment>If set to "No", it is possible to pre order products that have quantity set to 1 or higher only. This way you can limit number of products available for pre order.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disableforpositiveqty" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Pre Order For Items With Positive Qty</label>
+                    <comment>If set to "Yes", pre orders will take effect only for products with quantity 0 or lower.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="allowemptyqty">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Options</label>
+                <field id="addtocartbuttontext" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add To Cart Button Text</label>
+                    <comment>Text to display on the button instead of 'Add To Cart'</comment>
+                </field>
+                <field id="defaultpreordernote" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Pre-Order Note</label>
+                    <comment>You can use product attributes like {sku} or {delivery_time}</comment>
+                </field>
+                <field id="orderpreorderwarning" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pre-Order Warning</label>
+                    <comment>Message to be displayed with order information</comment>
+                </field>
+            </group>
+
+            <group id="additional" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Additional Options</label>
+                <field id="discovercompositeoptions" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect Complex Products Which Consist only of Pre-Order Components</label>
+                    <comment><![CDATA[
+                            If set to 'Yes', the extension analyzes your configurable, bundle and grouped products on category pages to indicate preorder status before customers choose any option in cases, when all components have 'Preorder' status.<br />
+                            Please be aware this may cause huge performance degradation for larger catalogs.
+                            ]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!--<field id="autoaddwarningtoemail" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automatically Add Warning to Transactional Emails</label>
+                    <comment>Please select 'No' in case you prefer to use {{var order.preorder_warning}} variable in your placing order transactional email template.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field> -->
+            </group>
+
+            <!--<group id="integration" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Theme Integration Parameters</label>
+                <field id="cartbutton" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cart Button</label>
+                    <comment>(left static) replacing text (right static)</comment>
+                </field>
+                <field id="productlistcartbutton" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product List Cart Button</label>
+                    <comment>left part (product id) right part</comment>
+                </field>
+                <field id="cartproductname" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cart Product Name</label>
+                    <comment>Note will be added right after match</comment>
+                </field>
+            </group>-->
+
+        </section>
+    </system>
+</config>

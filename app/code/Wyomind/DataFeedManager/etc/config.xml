@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2015 Wyomind. All rights reserved.
+  See LICENSE.txt for license details.
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+    <default>
+        <datafeedmanager>
+            <license>
+                <!-- required for License Manager -->
+                <extension_label>Data Feed Manager</extension_label>
+                <extension_version>11.0.0.4</extension_version>
+                <extension_code>dfm</extension_code>
+                <get_online_license>1</get_online_license>
+            </license>
+            <settings>
+                <report_title>Data Feed Manager - report </report_title>
+            </settings>
+            <system>
+                <trans_domain_export>1</trans_domain_export>
+                <preview>10</preview>
+                <buffer>10</buffer>
+                <sqlsize>1500</sqlsize> 
+                <filters>10</filters>
+                <filters_sql>0</filters_sql>
+                <include_in_menu>0</include_in_menu>
+                <include_disabled>0</include_disabled>
+                <memory_limit>1024</memory_limit>
+                <url_rewrite>0</url_rewrite>
+                <log>0</log>
+            </system>
+        </datafeedmanager>
+    </default>
+</config>

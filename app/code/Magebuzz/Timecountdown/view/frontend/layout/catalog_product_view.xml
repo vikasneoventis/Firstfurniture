@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magebuzz_Timecountdown::css/simple.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/colorful.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/flip.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/timer.css" />
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Magebuzz\Timecountdown\Block\Timecountdown" name="timecountdown.product.view"
+                   template="timer.phtml" after="-" ifconfig="timecountdown/general/show_in_product_page" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

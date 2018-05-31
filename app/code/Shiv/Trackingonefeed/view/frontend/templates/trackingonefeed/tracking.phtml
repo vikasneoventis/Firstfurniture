@@ -1,0 +1,49 @@
+<?php
+/*
+ * Turiknox_Webgains
+
+ * @category   Turiknox
+ * @package    Turiknox_Webgains
+ * @copyright  Copyright (c) 2017 Turiknox
+ * @license    https://github.com/Turiknox/magento2-webgains-tracking/blob/master/LICENSE.md
+ * @version    1.0.0
+ */
+?>
+<?php
+$orderReference = $block->escapeHtml($this->getOrderIncrementId());
+$orderTotal = $block->getGrandTotal();
+$onefeedSSId = $block->escapeHtml($this->getOnefeedSsId());
+?>
+
+<script type="text/javascript" language="javascript"> 
+var of_ssid = '<?php echo $onefeedSSId?>'; 
+var cs = '<?php echo $orderTotal ?>'; 
+var oi = '<?php echo $orderReference; ?>'; 
+var it = 1; 
+</script> 
+
+<script type="text/javascript" language="javascript" src="//tracking.onefeed.co.uk/t.js"></script> 
+<noscript> 
+<img border="0" src="//tracking.onefeed.co.uk/ProcessProductCheckout.ashx?of_ssid=<?php echo $onefeedSSId?>&cs=&<?php echo $orderTotal?>&it=1&oi=<?php echo $orderReference; ?>" /> 
+</noscript>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1016386537;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "6EwuCPe9nAIQ6afT5AM";
+var google_conversion_value = <?php echo $orderTotal ?>;
+var google_conversion_currency = "GBP";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript"
+src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt=""
+src="https://www.googleadservices.com/pagead/conversion/1016386537/?label=6EwuCPe9nAIQ6afT5AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>

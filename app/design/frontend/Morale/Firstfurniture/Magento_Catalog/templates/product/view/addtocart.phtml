@@ -1,0 +1,90 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Basket'); ?>
+<?php  $attr = $_product->getResource()->getAttribute('preorderdate');?>
+<?php if($attr->getFrontend()->getValue($_product) != ''):?>
+<div class="col-md-12 col-sm-12 text-center">
+    <span class="clr-pink">
+        
+        <strong><?php echo __('Pre-Order:')?> <?php echo $attr->getFrontend()->getValue($_product) ?></strong>
+       
+    </span>
+</div>
+ <?php endif;?>
+<?php if ($_product->isSaleable()): ?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty mobileqty">
+            <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
+            <div class="control">
+                <div class="qty-ctl">
+                    <button type="button" title="decrease" onclick="changeQty(0); return false;" class="decrease-qty">decrease</button>
+                </div>
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                       title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+                <div class="qty-ctl">
+                    <button type="button" title="increase" onclick="changeQty(1); return false;" class="increase-qty">increase</button>
+                </div>
+            
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button">
+                <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+            </button>
+            <?php echo $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php if (!$block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "catalogAddToCart": {
+                "bindSubmit": true
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+<script type="text/javascript">
+function changeQty(increase) {
+
+        var elementQty = document.getElementsByName("qty")[0];
+        var qty = parseInt(elementQty.value);
+        if ( !isNaN(qty) ) {
+                qty = increase ? qty+1 : (qty>1 ? qty-1 : 1);
+                elementQty.value = qty;
+        }
+}
+</script>

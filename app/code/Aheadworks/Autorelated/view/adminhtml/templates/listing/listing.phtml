@@ -1,0 +1,48 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var \Aheadworks\Autorelated\Block\Adminhtml\Rule\Listing $block */
+?>
+<?php if ($block->getCollection()): ?>
+    <?php if ($block->isAjax()): ?>
+        <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <?php endif; ?>
+        <div class="aheadworks-listing-wrap">
+            <table class="data-listing">
+                <thead>
+                    <tr>
+                        <?php foreach ($block->getListingColumns() as $column): ?>
+                            <th class="<?php /* @noEscape */ echo $column->getCssClass() ?>">
+                                <?php /* @noEscape */ echo $column->getHeaderHtml($block->getType()) ?>
+                            </th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($block->getCollection()->getSize() > 0): ?>
+                        <?php foreach ($block->getCollection() as $item): ?>
+                            <tr <?php if (!$item->getStatus()): ?>class="event-disabled"<?php endif; ?>>
+                                <?php foreach ($block->getListingColumns() as $column): ?>
+                                    <td class="<?php /* @noEscape */ echo $column->getCssClass() ?>">
+                                        <?php /* @noEscape */ echo $column->getColumnRenderer()->render($item) ?>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr class="data-listing-no-data">
+                            <td colspan="<?php /* @noEscape */ echo count($block->getListingColumns()) ?>">
+                                <?php echo $block->escapeHtml(__('We couldn\'t find any records')) ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php endif ?>

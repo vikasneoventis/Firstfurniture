@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+    <attribute name="data-spy" value="scroll"/>
+    <attribute name="data-target" value=".navbar"/>
+    <attribute name="data-offset" value="52" />
+    <referenceContainer name="header-wrapper">
+        <container name="header.search.links" label="Header Search Links" htmlTag="div" htmlClass="search-header-links" after="-">
+            
+        </container>
+        <container name="header.phone" label="Header Phone" htmlTag="div" htmlClass="website-phone" before="top.search">
+            <block class="Magento\Cms\Block\Block" name="ff_header_website_trust_pilot" >
+                <arguments>
+                    <argument name="block_id" xsi:type="string">ff_header_website_trust_pilot</argument>
+                </arguments>
+            </block>
+            <container name="header.phone.static" label="Header Phone Static Block" htmlTag="div" htmlClass="website-phone-inner">
+                <block class="Magento\Cms\Block\Block" name="ff_header_website_phone" >
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">ff_header_website_phone</argument>
+                    </arguments>
+                </block>
+            </container>
+            
+        </container>
+     </referenceContainer>
+    <referenceContainer name="header.panel">
+        <!--<container name="header.message" label="Header Message" htmlTag="div" htmlClass="header-message" before="custom.links">
+            <block class="Magento\Cms\Block\Block" name="header_top_message" >
+                <arguments>
+                    <argument name="block_id" xsi:type="string">header_top_message</argument>
+                </arguments>
+            </block>
+        </container>-->
+        <block class="Magento\Theme\Block\Html\Header" name="custom.links" template="html/custom-links.phtml" before="-" />
+    </referenceContainer>
+    <referenceBlock name="header.links" after="logo">
+        <block class="Magento\Customer\Block\Account\Link" name="my-account-link" before="-">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Account</argument>
+                    <argument name="class" xsi:type="string">hidden-xs</argument>
+                </arguments>
+            </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="contact-us-link" after="my-account-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
+                <argument name="path" xsi:type="string" translate="true">contact</argument>
+                <argument name="class" xsi:type="string">hidden-xs</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+    <move element="header.links" destination="header.search.links" before="-" />
+    <move element="top.search" destination="header.search.links" after="header.links" />
+    <!--<move element="minicart" destination="header-wrapper" after="-" />-->
+    <referenceContainer name="header.container">
+        <container name="slideshow-header" label="Slideshow Header" as="slideshow-header" htmlTag="div" htmlClass="slideshow-wrapper"></container>
+        <container name="customheader-nav" label="Header Navigation" as="customheader-nav" htmlTag="div" htmlClass="navigation-wrapper" before="slideshow-header"></container>
+    </referenceContainer>
+    
+    <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/logo.png</argument>
+                <argument name="logo_img_width" xsi:type="number">227</argument> 
+                <argument name="logo_img_height" xsi:type="number">71</argument>
+            </arguments>
+        </referenceBlock>
+    <remove name="report.bugs"/>
+    
+    
+    
+    
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceContainer name="sidebar.additional" remove="true" />
+    <referenceContainer name="register-link" remove="true" />
+    <referenceContainer name="login-link" remove="true" />
+    <!--<referenceBlock name="catalog.topnav" remove="true" />-->
+    
+    <referenceBlock name="footer-container">
+        <block class="Magento\Theme\Block\Html\Footer" name="custom_footer" as="custom_footer" template="html/custom_footer.phtml"/>
+   </referenceBlock>
+     
+    <referenceContainer name="before.body.end">
+        <block class="Magento\Framework\View\Element\Text" name="exampleScript">
+            <arguments>
+                <argument name="text" xsi:type="string"><![CDATA[<script type="text/javascript"> !function(){var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src="//config1.veinteractive.com/tags/811818e7/45bf/4db7/a40e/c1077dfbdddd/tag.js";var b=document.getElementsByTagName("head")[0];if(b)b.appendChild(a,b);else{var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)}}(); </script>]]></argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+    
+</body>
+</page>

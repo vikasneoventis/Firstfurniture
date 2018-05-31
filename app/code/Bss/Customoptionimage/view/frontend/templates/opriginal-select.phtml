@@ -1,0 +1,149 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+?>
+
+<?php
+$productId = $block->getProduct()->getId();
+$_option = $block->getOption();
+$_values = $_option->getValues();
+$class = ($_option->getIsRequire()) ? ' required' : '';
+$_moduleConfig = $this->helper('Bss\Customoptionimage\Helper\ModuleConfig');
+$_dropdownViewType = $_moduleConfig->getDropdownView();
+$_multipleViewType = $_moduleConfig->getMultipleSelectView();
+$_url = $block->getImgUrlList();
+?>
+<?php if ($_moduleConfig->isModuleEnable()) : ?>
+    <div class="field<?php echo $class; ?>">
+        <?php if ($_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DROP_DOWN) : ?>
+            <label class="label" for="select_<?php echo $_option->getId() ?>">
+                    <span><?php echo  $block->escapeHtml($_option->getTitle()) ?></span>
+            </label>
+            <?php if ($_dropdownViewType == 0) : ?>
+                <div class="Bss_image_preview" id="Bss_image_preview_<?php echo $_option->getId() ?>"
+                style="display: none;">
+                    <img alt="" id="image_preview_<?php echo $_option->getId() ?>" 
+                    style="height: <?php echo $_moduleConfig->getDropdownSizeY() ?>px;
+                    width: <?php echo $_moduleConfig->getDropdownSizeX() ?>px" />
+                </div>
+            <?php elseif ($_dropdownViewType == 1) : ?>
+                <div class="Bss_image_preview" id="Bss_image_preview_<?php echo $_option->getId() ?>"
+                style="display: block;">
+                    <?php foreach ($_values as $customId) : ?>
+                        <?php if (array_key_exists($customId->getOptionTypeId(), $_url)
+                        && $_url[$customId->getOptionTypeId()] != '') : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $_option->getId().'_'.$customId->getOptionTypeId() ?>"
+                            src="<?php echo $_url[$customId->getOptionTypeId()] ?>"
+                            title="<?php echo $customId->getTitle() ?>"
+                            style="height: <?php echo $_moduleConfig->getDropdownSizeY() ?>px;
+                            width: <?php echo $_moduleConfig->getDropdownSizeX() ?>px;
+                            border: solid 2px #ddd;" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#product-options-wrapper": {
+                        "bss_preview_dropdown": {
+                            "productId": "<?php echo $productId; ?>",
+                            "baseUrl": "<?php echo $_moduleConfig->getBaseUrl(); ?>",
+                            "viewType": <?php echo $_dropdownViewType ?>
+                        }
+                    }
+                }
+            </script>
+        <?php elseif ($_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_MULTIPLE) : ?>
+            <label class="label" for="select_<?php echo $_option->getId() ?>">
+                <span><?php echo  $block->escapeHtml($_option->getTitle()) ?></span>
+            </label>
+            <?php if ($_multipleViewType == 0) : ?>
+                <div class="Bss_image_multiselect" id="Bss_image_multiselect_<?php echo $_option->getId() ?>">
+                </div>
+            <?php elseif ($_multipleViewType == 1) : ?>
+                <div class="Bss_image_multiselect" id="Bss_image_multiselect_<?php echo $_option->getId() ?>"
+                style="display: block">
+                    <?php foreach ($_values as $customId) : ?>
+                        <?php if (array_key_exists($customId->getOptionTypeId(), $_url)
+                        && $_url[$customId->getOptionTypeId()] != '') : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $_option->getId().'_'.$customId->getOptionTypeId() ?>"
+                            src="<?php echo $_url[$customId->getOptionTypeId()]; ?>"
+                            title="<?php echo $customId->getTitle() ?>"
+                            style="height: <?php echo $_moduleConfig->getMultipleSizeY() ?>px;
+                            width: <?php echo $_moduleConfig->getMultipleSizeX() ?>px;
+                            border: solid 2px #ddd;" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#product-options-wrapper": {
+                        "bss_preview_multiple": {
+                            "productId": "<?php echo $productId; ?>",
+                            "baseUrl": "<?php echo $_moduleConfig->getBaseUrl(); ?>",
+                            "imageHeight": "<?php echo $_moduleConfig->getMultipleSizeY() ?>",
+                            "imageWidth": "<?php echo $_moduleConfig->getMultipleSizeX() ?>",
+                            "viewType": <?php echo $_multipleViewType ?>
+                        }
+                    }
+                }
+            </script>
+        <?php else : ?>
+        <label class="label" for="select_<?php echo $_option->getId() ?>">
+            <span><?php echo  $block->escapeHtml($_option->getTitle()) ?></span>
+        </label>
+        <?php endif; ?>
+        <div class="control">
+            <?php echo $block->getValuesHtml() ?>
+            <?php if ($_option->getIsRequire()) : ?>
+                <?php if ($_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_RADIO
+                || $_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_CHECKBOX) : ?>
+                    <span id="options-<?php echo $_option->getId() ?>-container"></span>
+                <?php endif; ?>
+            <?php endif;?>
+        </div>
+    </div>
+
+<?php else : ?>
+    <div class="field<?php  echo $class; ?>">
+        <label class="label" for="select_<?php echo $_option->getId() ?>">
+            <span><?php echo  $block->escapeHtml($_option->getTitle()) ?></span>
+        </label>
+        <div class="control">
+            <?php echo $block->getValuesHtml() ?>
+            <?php if ($_option->getIsRequire()) : ?>
+                <?php if ($_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_RADIO
+                || $_option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_CHECKBOX) : ?>
+                    <span id="options-<?php echo $_option->getId() ?>-container"></span>
+                <?php endif; ?>
+            <?php endif;?>
+        </div>
+    </div>
+<?php endif;?>    

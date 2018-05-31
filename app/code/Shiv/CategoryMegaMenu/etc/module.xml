@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author		Shiv
+ * @category    CategoryMegaMenu
+ * @package     Shiv_CategoryMegaMenu
+ * @copyright   Free to use 
+ */
+-->
+<config  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+   <module name="Shiv_CategoryMegaMenu"  setup_version="1.0.0">
+        <sequence>           
+            <module name="Magento_Catalog"/>  
+        </sequence>   
+   </module>
+</config> 

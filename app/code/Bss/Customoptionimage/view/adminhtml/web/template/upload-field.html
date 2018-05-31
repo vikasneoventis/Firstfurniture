@@ -1,0 +1,54 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * BSS Commerce does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BSS Commerce does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   BSS
+ * @package    Bss_Customoptionimage
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+ -->
+<div class="bss-upload-field">
+    <span data-bind="click: del, attr: { id: bss_upl_span, class: getClass()}">
+        <img data-bind="attr: {id: bss_upl_preview, src: tempImg}" width="32px" height="32px" alt=""/>
+    </span>
+    <span class="bss-upload-button" data-bind="event: { click: clickUpload }">
+    </span>
+    <input type="hidden" data-bind="
+        attr: {
+            name: inputName,
+            form: 'product_form',
+            id: uploadFieldId,
+            value: tempImg
+        }"
+    />
+    <input type="file" data-bind="
+        hasFocus: focused,
+        event: { change: readURL },
+        attr: {
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            form: 'product_form'
+        }"
+    />
+</div>

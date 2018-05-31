@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var $block \Magento\Theme\Block\Html\Title
+ */
+$cssClass = $block->getCssClass() ? ' ' . $block->getCssClass() : '';
+$title = '';
+if (trim($block->getPageHeading())) {
+    $title = '<span class="base" data-ui-id="page-title-wrapper" ' .  $block->getAddBaseAttribute() . '>'
+        . $block->escapeHtml($block->getPageHeading()) . '</span>';
+}
+?>
+<?php if ($title): ?>
+<div class="page-title-wrapper<?php /* @escapeNotVerified */ echo $cssClass; ?>">
+    <h1 class="page-title"
+        <?php if ($block->getId()): ?> id="<?php /* @escapeNotVerified */ echo $block->getId();?>" <?php endif; ?>
+        <?php if ($block->getAddBaseAttributeAria()): ?>
+            aria-labelledby="<?php /* @escapeNotVerified */ echo $block->getAddBaseAttributeAria(); ?>"
+        <?php endif; ?>>
+        <?php /* @escapeNotVerified */ echo $title ?>
+    </h1>
+    <div class="hide" id="AOPriceMatch">
+    <div id="pm">
+        <img src="<?php echo $this->getViewFileUrl('images/p_p.png'); ?>" alt="<?php echo __('Price Promise')?>">
+        <h3><?php echo __('Price Promise')?></h3>
+    </div>
+    <div id="inner">
+        <p><?php echo __('We simply won\'t be')?><br> <span><?php echo __('beaten on price!')?></span></p>
+        <h6><?php echo __('check out our')?></h6>
+        <p><a id="price_promise"><?php echo __('price promise')?> </a></p>
+        <p><?php echo _('or Call on')?> <br> <span><?php echo _('0800 975 0508')?> </span></p>
+        </div>                   
+    </div>
+    <?php echo $block->getChildHtml(); ?>
+</div>
+<?php endif; ?>
